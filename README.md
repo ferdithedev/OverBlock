@@ -35,3 +35,5 @@ You can use this example as a guide.
 |roundtime         |The time in minutes a round lasts when nobody wins                                               |
 |Spawnlocation     |The location where players spawn when they join on the server (will be switchable in near future)|
 |Lobbyspawnlocation|The location where players will be teleported to when joining the lobby                          |
+
+4. To start a game just teleport with at least 2 players in the lobby world and wait.
