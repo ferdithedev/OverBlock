@@ -7,6 +7,10 @@ More or less fun Minecraft minigame including fighting with special items and an
 ## Important!
 - This plugin is still under heavy development so some features aren't working as expected!
 
+## Gameplay
+
+For a description of the gameplay see https://ferdithedev.github.io/OverBlock/gameplay.html!
+
 ## How to use
 
 ### Setting up
