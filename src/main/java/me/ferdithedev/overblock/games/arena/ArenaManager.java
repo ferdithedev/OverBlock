@@ -4,6 +4,7 @@ import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.games.arena.better.LocalGameMap;
 import me.ferdithedev.overblock.util.FileUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ArenaManager {
 
@@ -27,6 +29,15 @@ public class ArenaManager {
         assert arenas != null;
         for(Arena a : arenas) {
             allArenas.add(new LocalGameMap(OverBlock.gameMapsFolder,a.getWorldName(),false, a));
+        }
+
+        for(File f : Objects.requireNonNull(Bukkit.getServer().getWorldContainer().listFiles())) {
+            for(Arena a : arenas) {
+                if(f.getName().contains(a.getWorldName()+"_active_")) {
+                    FileUtil.delete(f);
+                    break;
+                }
+            }
         }
 
         List<LocalGameMap> toRemove = new ArrayList<>();
