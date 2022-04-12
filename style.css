@@ -81,6 +81,10 @@ nav a:not(.github):hover {
     text-decoration: none;
 }
 
+.githublink {
+    color: whitesmoke;
+}
+
 .github:hover {
     border-color: rgb(255, 0, 221);
     box-shadow: 0 0 2em 0 rgb(255, 0, 221);
