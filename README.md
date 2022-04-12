@@ -37,3 +37,44 @@ You can use this example as a guide.
 |Lobbyspawnlocation|The location where players will be teleported to when joining the lobby                          |
 
 4. To start a game just teleport with at least 2 players in the lobby world and wait.
+
+### Adding items
+
+First you have to create a new class with is extending the MPItem class.
+
+```java
+public class MagicWand extends MPItem {
+
+    public MagicWand(JavaPlugin plugin) {
+        super(plugin, Material.STICK, "Magic Wand", 40, MPItemType.WEAPON, MPItemRarity.SPECIAL, "§7Make some magic stuff (or staff???)");
+    }
+
+    @Override
+    public void function(Player player) {
+        player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+    }
+
+    @Override
+    public void click(PlayerInteractEvent e) {
+        if(e.getAction() == Action.RIGHT_CLICK_AIR) {
+            if(this.noCooldown(e.getPlayer())) {
+                function(e.getPlayer());
+            } else {
+                MPItemManager.cooldownMessage(e.getPlayer());
+            }
+        }
+    }
+}
+```
+
+The arguments of a MPItem are the following:
+
+|Argument             |Description                                                                                                               |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+|plugin   (JavaPlugin)|The plugin you are writing in                                                                                             | 
+|material   (Material)|The material your item is supposed to be                                                                                  |
+|name         (String)|The display name the item will have                                                                                       |
+|cooldown       (long)|The cooldown of the item                                                                                                  |
+|type     (MPItemType)|The type of the item (TURRET, TRAP, WEAPON, TOOL)                                                                         |
+|rarity  (MPItemRariy)|The rarity of the item which affects the coloring and possibility of getting one (COMMON, UNIQUE, EPIC, ULTIMATE, SPECIAL)|
+|lore (String varargs)|Lore of the item                                                                                                          |
