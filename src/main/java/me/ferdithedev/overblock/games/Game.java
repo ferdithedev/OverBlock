@@ -190,7 +190,8 @@ public class Game {
                 p.getInventory().clear();
                 p.setFoodLevel(20);
                 p.setHealth(20);
-                p.sendMessage("§eMap build by: §c" + arena.getArena().getCreator());
+                String creator = arena.getArena().getCreator();
+                if(creator != null && !creator.strip().isEmpty()) p.sendMessage("§eMap build by: §c" + arena.getArena().getCreator());
             }
         }
         state = GameManager.GameState.INGAME;
