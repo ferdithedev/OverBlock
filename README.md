@@ -23,3 +23,11 @@ You can use this example as a guide.
 |builder     |(optional) the name of the creator of the map                              |
 |x1,y1,z1    |The first coordinate of the cuboid where the arena is in                   |
 |x2,y2,z2    |The second coordinate of the cuboid where the arena is in                  |
+
+3. As the last step you want to edit the `config.yml` which is also created in the datafolder of the plugin.
+|Name              |Function                                                                                         |
+|------------------|-------------------------------------------------------------------------------------------------|
+|lobby             |The exact name of the world which is used as the lobby                                           |
+|playersperteam    |The amount of players which can fit into one team                                                |
+|Spawnlocation     |The location where players spawn when they join on the server (will be switchable in near future)|
+|Lobbyspawnlocation|The location where players will be teleported to when joining the lobby                          |
