@@ -97,3 +97,23 @@ MPAPI.registerItemPackage(magicWands);
 ```
 
 Now you can use your items ingame :-)
+
+### Items UI
+
+With the `/items` command you can open a UI where all registered ItemPackages are listed. You can click on them and see all items of them and disable them if you want.
+
+![packages](https://user-images.githubusercontent.com/69450649/163058454-f23519a6-a9c2-4706-9706-89885d6a369f.png)
+
+![items](https://user-images.githubusercontent.com/69450649/163058465-d82892e8-36b5-4529-87ff-b2a2e08234ad.png)
+
+## Commands
+
+|Command                    |Function                       |
+|---------------------------|-------------------------------|
+|/getmpitem                 |Get a registered MPItem        |
+|/skip                      |Skips the lobby waiting time   |
+|/getrandomitem <luck (int)>|Get a random item              |
+|/reloaditems               |Reload items.yml               |
+|/items                     |Opens the item ui              |
+|/spawnbox                  |Spawns a itembox underneath you|
+
