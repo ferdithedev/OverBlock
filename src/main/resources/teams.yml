@@ -1,0 +1,13 @@
+Teams:
+  - ==: Team
+    name: "Red"
+    color: RED
+  - ==: Team
+    name: "Blue"
+    color: BLUE
+  - ==: Team
+    name: "Green"
+    color: GREEN
+  - ==: Team
+    name: "Yellow"
+    color: YELLOW

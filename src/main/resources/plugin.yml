@@ -1,0 +1,29 @@
+name: OverBlock
+version: ${project.version}
+main: me.ferdithedev.overblock.OverBlock
+api-version: 1.17
+prefix: MP
+authors: [ Ferdi_the_best ]
+description: OverBlock
+softdepend:
+  - Multiverse-Core
+commands:
+  getmpitem:
+    description: Get a item
+    permission: overblock.getmpitem
+  skip:
+    description: Skip the waiting time
+    permission: overblock.skip
+  lobby:
+    aliases: ['l','hub']
+  getrandomitem:
+    description: Get random item based on your luck
+    aliases: ['gri']
+  reloaditems:
+    description: Reload items.yml
+  items:
+    description: Download item packs and enable/disable items
+  btp:
+    description: Like normal /tp but with worlds
+  spawnbox:
+    description: Spawns box based on int

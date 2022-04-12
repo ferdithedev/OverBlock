@@ -1,0 +1,5 @@
+OverBlock:
+  boost_staff:
+    enabled: true
+  flamethrower:
+    enabled: true
