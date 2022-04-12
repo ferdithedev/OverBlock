@@ -1,0 +1,27 @@
+@import url('https://fontlibrary.org//face/minecraftia');
+
+.red {
+    color: #FF5555;
+    font-family: "MinecraftiaRegular";
+    font-size: 80%;
+}
+.blue {
+    color: #5555FF;
+    font-family: "MinecraftiaRegular";
+    font-size: 80%;
+}
+.yellow {
+    color: #FFFF55;
+    font-family: "MinecraftiaRegular";
+    font-size: 80%;
+}
+.green {
+    color: #55FF55;
+    font-family: "MinecraftiaRegular";
+    font-size: 80%;
+}
+.darkred {
+    color: #AA0000;
+    font-family: "MinecraftiaRegular";
+    font-size: 85%;
+}

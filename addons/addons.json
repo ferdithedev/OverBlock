@@ -1,0 +1,14 @@
+{
+    "addons": {
+        "scifi": {
+            "name": "scifi Items",
+            "description": "Some weapons from a scifi universe",
+            "filelocation": "https://ferdithedev.github.io/ModernP/addons/scifi.jar"
+        },
+        "magicwands": {
+            "name": "Magic Wands",
+            "description": "Some wands with spells",
+            "filelocation": "https://ferdithedev.github.io/ModernP/addons/magicwands.jar"
+        }
+    }
+}

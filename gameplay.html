@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ModernP - Gameplay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gameplay.css">
+    <link rel="stylesheet" href="minecraft.css">
+    <meta charset="utf-8">
+</head>
+
+<header>
+
+    <div class="container">
+
+        <a href="index.html"><img src="images/MP2.png" alt="logo" class="logo"></a>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gameplay.html">Gameplay</a></li>
+                <li><a href="addons.html">Addons</a></li>
+                <li><a href="addons.html#apisection">API</a></li>
+                <li><a href="features.html">Features n' TODO</a></li>
+                <li>
+                    <a href="https://github.com/ferdithedev/ModernP" target="_blank" class="github">
+                        <img src="images/github.png"
+                            style='vertical-align: middle; height: 38px; width: auto; margin-bottom: 4px;'>
+                        GitHub</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</header>
+
+<body>
+    <div class="title">
+        <p>Gameplay</p>
+    </div>
+
+    <div class="content">
+        <p class="description">How the game is played and in which order what happens</p>
+        <p class="description" style="color: red;">
+            <b>WARNING!</b> This plugin is under heavy development so some features listed on
+            this site may not be already ingame or bugged!
+        </p>
+
+        <p class="subtitle">Phases in the game</p>
+        <ul class="listul">
+            <a href="#lobbysection" class="sublink">
+                <li class="listtitle">Lobby</li>
+            </a>
+            <a href="#ingamesection" class="sublink">
+                <li class="listtitle">Ingame</li>
+            </a>
+            <a href="#endingsection" class="sublink">
+                <li class="listtitle">Ending</li>
+            </a>
+        </ul>
+
+        <p class="subtitle" id="lobbysection">Lobby</p>
+        <p class="subtitledescription">The lobby is the place where you wait for other players to start a game together
+        </p>
+        <p>To join the lobby you just have to get teleported into a world, which is set in the config.<br>
+            (by default it's set to 'lobby')<br><br>
+            When you've joined the lobby you will notice that there are two items in your hotbar:<br>
+        <p>
+
+            <img src="images/lobbyhotbar.png" class="hotbarimg">
+
+        <p class="hotbarimgdescription">
+            - Netherstar (Slot 1): You can right-click the netherstar to vote for a gamemode (normal, hardcore)<br>
+            (by default the normal mode is choosen)<br>
+        </p>
+        <p class="hotbarimgdescription">
+            - Oak Door (Slot 9): When you right-click the door you get teleported back into the main-lobby<br><br>
+        </p>
+
+        <img src="images/bossbar.png" class="bossbarimg">
+        <img src="images/bossbar2.png" class="bossbarimg">
+
+        <p>On the top of your screen will be a bossbar showing which gamemode is currently choosen.<br><br>
+
+            You'll need at least two players to play the game but with more players it's more fun. The maximum<br>
+            amount of players per game is by default set to 16 but theoretically infinite.<br>
+            The waiting time in the lobby depends on how many players are in it (more players = shorter <br>
+            waiting time). OP's can use the <code>/skip</code> command to set the remaining time directly to 5 seconds.
+        </p>
+        <p class="subtitle" id="ingamesection">Ingame</p>
+
+        <p class="subtitledescription">This section covers all things which can happen during the game</p>
+
+        <p>
+            Once you have been teleported into the random choosen arena all players will be dived<br>
+            into four teams (Default: <span class="red">Red</span>, <span class="blue">Blue</span>, <span
+                class="yellow">Yellow</span>,
+            <span class="green">Green</span>).<br>
+            If there aren't at least four players some teams will be empty.<br><br>
+            In <span class="yellow">normal</span> mode you will have three lifes. In the <span
+                class="darkred">HARDCORE</span> mode just one! Other
+            differences<br>
+            between the modes is the damage: In the <span class="yellow">normal</span> mode fall- and firedamage is
+            disabled other<br>
+            than in <span class="darkred">HARDCORE</span> mode. In addition, damage from all sources is doubled in <span
+                class="darkred">HARDCORE</span> mode!
+        </p>
+
+        <img src="images/silverbox.png" style="margin-left: 100px;">
+        <img src="images/purplebox.png" style="margin-left: 100px;">
+        <img src="images/redbox.png" style="margin-left: 100px;">
+
+        <p>
+            Every 10 seconds one item will spawn in the area. Currently there are three possible items.<br>
+            (Silver box, purple box, red box)<br>
+            By optaining them you have a random chance to get an item. Each box has an base amount of<br>
+            luck. The higher the luck, the better the item. (Silver has the lowest luck and red the highest)<br><br>
+
+            <span style="font-size: 20px;"><span style="text-decoration: underline;">TIP:</span> You can manually spawn
+                a box by typing
+                <code>/spawnbox 10(silver)|85(purple)|100(red)</code> (the box will spawn two blocks below you)</span>
+        </p>
+
+        <p class="subtitle" id="endingsection">Ending</p>
+
+        <p class="subtitledescription">This, last, area is dedicated to everything which happens after the game</p>
+    </div>
+
+    <div class="info">
+        Copied to clipboard!
+    </div>
+</body>
+
+<script src="script.js"></script>
+
+</html>
