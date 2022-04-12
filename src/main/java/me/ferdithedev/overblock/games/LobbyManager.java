@@ -3,6 +3,7 @@ package me.ferdithedev.overblock.games;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.util.ChatUtil;
+import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -23,6 +24,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -253,6 +255,7 @@ public class LobbyManager implements Listener {
             m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         i.setItemMeta(m);
+        i = ItemUtil.editPersistentDataContainerI(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
         return i;
     }
 
@@ -266,6 +269,7 @@ public class LobbyManager implements Listener {
             m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         i.setItemMeta(m);
+        i = ItemUtil.editPersistentDataContainerI(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
         return i;
     }
 
