@@ -40,6 +40,8 @@ You can use this example as a guide.
 
 ### Adding items
 
+#### Creating the item
+
 First you have to create a new class with is extending the MPItem class.
 
 ```java
@@ -78,3 +80,18 @@ The arguments of a MPItem are the following:
 |type     (MPItemType)|The type of the item (TURRET, TRAP, WEAPON, TOOL)                                                                         |
 |rarity  (MPItemRariy)|The rarity of the item which affects the coloring and possibility of getting one (COMMON, UNIQUE, EPIC, ULTIMATE, SPECIAL)|
 |lore (String varargs)|Lore of the item                                                                                                          |
+
+#### Registering the item
+
+First, you have to create a ItemPackage which contains your new items.
+```java
+ItemPackage magicWands = new ItemPackage(plugin, "magic_wands","§e§kM§r§d§lMagic Wands§r§e§kM§r", Material.STICK, "§eAdding some magic wands");
+```
+than you add your items to the package
+```java
+magicWands.addItem(new MagicWand(ExamplePlugin.getInstance()));
+```
+finally, you register the ItemPackage
+```java
+MPAPI.registerItemPackage(magicWands);
+```
