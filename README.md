@@ -30,5 +30,6 @@ You can use this example as a guide.
 |------------------|-------------------------------------------------------------------------------------------------|
 |lobby             |The exact name of the world which is used as the lobby                                           |
 |playersperteam    |The amount of players which can fit into one team                                                |
+|roundtime         |The time in minutes a round lasts when nobody wins                                               |
 |Spawnlocation     |The location where players spawn when they join on the server (will be switchable in near future)|
 |Lobbyspawnlocation|The location where players will be teleported to when joining the lobby                          |
