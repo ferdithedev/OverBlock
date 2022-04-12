@@ -95,3 +95,5 @@ finally, you register the ItemPackage
 ```java
 MPAPI.registerItemPackage(magicWands);
 ```
+
+Now you can use your items ingame :-)
