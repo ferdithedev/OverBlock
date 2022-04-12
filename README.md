@@ -25,6 +25,7 @@ You can use this example as a guide.
 |x2,y2,z2    |The second coordinate of the cuboid where the arena is in                  |
 
 3. As the last step you want to edit the `config.yml` which is also created in the datafolder of the plugin.
+
 |Name              |Function                                                                                         |
 |------------------|-------------------------------------------------------------------------------------------------|
 |lobby             |The exact name of the world which is used as the lobby                                           |
