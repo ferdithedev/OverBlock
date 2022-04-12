@@ -9,7 +9,7 @@ More or less fun Minecraft minigame including fighting with special items and an
 
 ## Gameplay
 
-For a description of the gameplay see https://ferdithedev.github.io/OverBlock/gameplay.html!
+For a description of the gameplay take a look at the [website](https://ferdithedev.github.io/OverBlock/gameplay.html)!
 
 ## How to use
 
