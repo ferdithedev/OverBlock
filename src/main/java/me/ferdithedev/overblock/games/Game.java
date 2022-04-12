@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static me.ferdithedev.overblock.games.ItemSpawner.spawnItem;
+
 public class Game {
 
     private BukkitRunnable itemSpawner;
@@ -154,7 +156,7 @@ public class Game {
         itemSpawner = new BukkitRunnable() {
             @Override
             public void run() {
-               ItemSpawner.spawnItem(-1,arena.getCuboid().getRandomSolidLocation());
+               spawnItem(-1,arena.getCuboid().getRandomSolidLocation());
             }
         };
         itemSpawner.runTaskTimer(plugin,0,200);

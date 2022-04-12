@@ -5,10 +5,11 @@ import com.mojang.authlib.properties.Property;
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.mpitems.MPItem;
 import me.ferdithedev.overblock.mpitems.MPItemRarity;
+import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.libs.org.apache.commons.codec.binary.Base64;
+
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
