@@ -1,8 +1,8 @@
 name: OverBlock
 version: ${project.version}
 main: me.ferdithedev.overblock.OverBlock
-api-version: 1.17
-prefix: MP
+api-version: 1.18
+prefix: OB
 authors: [ Ferdi_the_best ]
 description: OverBlock
 softdepend:

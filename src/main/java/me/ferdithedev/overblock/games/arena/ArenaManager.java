@@ -26,32 +26,37 @@ public class ArenaManager {
 
         List<Arena> arenas = (ArrayList<Arena>) arenaconfig.get("Arenas");
 
-        assert arenas != null;
-        for(Arena a : arenas) {
-            allArenas.add(new LocalGameMap(OverBlock.gameMapsFolder,a.getWorldName(),false, a));
-        }
-
-        for(File f : Objects.requireNonNull(Bukkit.getServer().getWorldContainer().listFiles())) {
+        if(arenas != null) {
             for(Arena a : arenas) {
-                if(f.getName().contains(a.getWorldName()+"_active_")) {
-                    FileUtil.delete(f);
-                    break;
+                allArenas.add(new LocalGameMap(OverBlock.gameMapsFolder,a.getWorldName(),false, a));
+            }
+
+            for(File f : Objects.requireNonNull(Bukkit.getServer().getWorldContainer().listFiles())) {
+                for(Arena a : arenas) {
+                    if(f.getName().contains(a.getWorldName()+"_active_")) {
+                        FileUtil.delete(f);
+                        break;
+                    }
                 }
             }
-        }
 
-        List<LocalGameMap> toRemove = new ArrayList<>();
+            List<LocalGameMap> toRemove = new ArrayList<>();
 
-        for(LocalGameMap map : allArenas) {
-            if(!map.load()) {
-                map.unload();
-                toRemove.add(map);
+            for(LocalGameMap map : allArenas) {
+                if(!map.load()) {
+                    map.unload();
+                    toRemove.add(map);
+                }
             }
+
+            allArenas.removeAll(toRemove);
+
+            inactiveArenas = allArenas;
+        } else {
+            inactiveArenas = new ArrayList<>();
+            OverBlock.printWarn("There are no maps registered in the 'arenas.yml' file. Make sure to add some there because otherwise the game isn't working");
         }
 
-        allArenas.removeAll(toRemove);
-
-        inactiveArenas = allArenas;
     }
 
     public LocalGameMap getFreeArena() {

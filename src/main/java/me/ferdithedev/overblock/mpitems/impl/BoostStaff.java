@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class BoostStaff extends MPItem {
 
     public BoostStaff(JavaPlugin plugin) {
-        super(plugin, Material.STICK, "Boost Staff", 40, MPItemType.TOOL, MPItemRarity.COMMON, "§7Rush to your opponents (or run away)");
+        super(plugin, Material.STICK, "Boost Staff", 40, MPItemType.WEAPON, MPItemRarity.COMMON, "§7Rush to your opponents (or run away)");
     }
 
     @Override
