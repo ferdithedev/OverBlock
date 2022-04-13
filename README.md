@@ -57,6 +57,7 @@ public class MagicWand extends MPItem {
 
     @Override
     public void function(Player player) {
+        //you can do way more here and probably damage other players because it's a weapon
         player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
     }
 
