@@ -30,7 +30,9 @@ You can use this example as a guide.
 |x1,y1,z1    |The first coordinate of the cuboid where the arena is in                   |
 |x2,y2,z2    |The second coordinate of the cuboid where the arena is in                  |
 
-3. As the last step you want to edit the `config.yml` which is also created in the datafolder of the plugin.
+3. If you want you can edit the `teams.yml` file. Note that you don't have to have 4 teams.
+
+4. As the last step you want to edit the `config.yml` which is also created in the datafolder of the plugin.
 
 |Name              |Function                                                                                         |
 |------------------|-------------------------------------------------------------------------------------------------|
@@ -40,7 +42,7 @@ You can use this example as a guide.
 |Spawnlocation     |The location where players spawn when they join on the server (will be switchable in near future)|
 |Lobbyspawnlocation|The location where players will be teleported to when joining the lobby                          |
 
-4. To start a game just teleport with at least 2 players in the lobby world and wait.
+5. To start a game just teleport with at least 2 players in the lobby world and wait.
 
 ### Adding items
 
