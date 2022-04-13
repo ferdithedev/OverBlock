@@ -2,7 +2,8 @@ package me.ferdithedev.overblock.api;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.mpitems.ItemPackage;
-import me.ferdithedev.overblock.mpitems.MPItemManager;
+import me.ferdithedev.overblock.mpitems.OBItemManager;
+import me.ferdithedev.overblock.mpitems.OBItem;
 
 /**
  * API of the OverBlock plugin
@@ -10,12 +11,12 @@ import me.ferdithedev.overblock.mpitems.MPItemManager;
  */
 public class MPAPI {
 
-    private static final MPItemManager manager = OverBlock.getMPItemManager();
+    private static final OBItemManager manager = OverBlock.getMPItemManager();
 
     /**
      * Register an ItemPackage which contains MPItems
      * @param itemPackage ItemPackage which is registered
-     * @see me.ferdithedev.overblock.mpitems.MPItem
+     * @see OBItem
      * @see ItemPackage
      */
     public static void registerItemPackage(ItemPackage itemPackage) {
@@ -25,9 +26,14 @@ public class MPAPI {
     /**
      * Remove an ItemPackage from the registered items list
      * @param itemPackage ItemPackage which is unregistered
-     * @see me.ferdithedev.overblock.mpitems.MPItem
+     * @see OBItem
      * @see ItemPackage
      */
     public static void unregisterItemPackage(ItemPackage itemPackage) {manager.unregisterItemPackage(itemPackage);}
 
+    /**
+     * Get the main class of the main plugin
+     * @see OverBlock
+     */
+    public static OverBlock getOverBlock() {return OverBlock.getInstance();}
 }

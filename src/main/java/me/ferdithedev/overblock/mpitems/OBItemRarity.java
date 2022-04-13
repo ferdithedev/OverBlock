@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public enum MPItemRarity {
+public enum OBItemRarity {
 
     COMMON(ChatColor.GRAY.toString(), "", 50, ChatColor.GRAY + "" + ChatColor.BOLD + "COMMON"),
     UNIQUE(ChatColor.YELLOW.toString(), "", 30, ChatColor.YELLOW + "" + ChatColor.BOLD + "UNIQUE"),
@@ -21,7 +21,7 @@ public enum MPItemRarity {
     private final double chance;
     private final String name;
 
-    MPItemRarity(String prefix, String suffix, double chance, String name) {
+    OBItemRarity(String prefix, String suffix, double chance, String name) {
         this.prefix = prefix;
         this.suffix = suffix;
         this.chance = chance;

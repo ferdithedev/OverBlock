@@ -13,15 +13,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MPItem {
+public abstract class OBItem {
 
     private final JavaPlugin plugin;
     private final Material material;
     private final ItemStack itemStack;
     private final String name;
     private final long cooldown;
-    private final MPItemType type;
-    private final MPItemRarity rarity;
+    private final OBItemType type;
+    private final OBItemRarity rarity;
     private final List<Player> users;
     private final String[] lore;
     private final String internalName;
@@ -29,7 +29,7 @@ public abstract class MPItem {
 
     private boolean enabled;
 
-    public MPItem(JavaPlugin plugin, Material material, String name, long cooldown, MPItemType type, MPItemRarity rarity, String... lore) {
+    public OBItem(JavaPlugin plugin, Material material, String name, long cooldown, OBItemType type, OBItemRarity rarity, String... lore) {
         this.plugin = plugin;
         this.material = material;
         this.cooldown = cooldown;
@@ -85,11 +85,11 @@ public abstract class MPItem {
         return name;
     }
 
-    public MPItemType getType() {
+    public OBItemType getType() {
         return type;
     }
 
-    public MPItemRarity getRarity() {return  rarity;}
+    public OBItemRarity getRarity() {return  rarity;}
 
     public JavaPlugin getPlugin() {
         return plugin;

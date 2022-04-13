@@ -1,9 +1,9 @@
 package me.ferdithedev.overblock.mpitems.impl;
 
-import me.ferdithedev.overblock.mpitems.MPItem;
-import me.ferdithedev.overblock.mpitems.MPItemManager;
-import me.ferdithedev.overblock.mpitems.MPItemRarity;
-import me.ferdithedev.overblock.mpitems.MPItemType;
+import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.mpitems.OBItemManager;
+import me.ferdithedev.overblock.mpitems.OBItemRarity;
+import me.ferdithedev.overblock.mpitems.OBItemType;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,10 +12,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-public class BoostStaff extends MPItem {
+public class BoostStaff extends OBItem {
 
     public BoostStaff(JavaPlugin plugin) {
-        super(plugin, Material.STICK, "Boost Staff", 40, MPItemType.WEAPON, MPItemRarity.COMMON, "§7Rush to your opponents (or run away)");
+        super(plugin, Material.STICK, "Boost Staff", 40, OBItemType.WEAPON, OBItemRarity.COMMON, "§7Rush to your opponents (or run away)");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class BoostStaff extends MPItem {
             if(this.noCooldown(e.getPlayer())) {
                 function(e.getPlayer());
             } else {
-                MPItemManager.cooldownMessage(e.getPlayer());
+                OBItemManager.cooldownMessage(e.getPlayer());
             }
         }
     }

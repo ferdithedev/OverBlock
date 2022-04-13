@@ -1,13 +1,13 @@
 package me.ferdithedev.overblock.mpitems;
 
-public enum MPItemType {
+public enum OBItemType {
 
     TURRET("turret"),
     TRAP("trap"),
     WEAPON("weapon"),
     TOOL("tool");
 
-    MPItemType(String s) {
+    OBItemType(String s) {
         this.s = s;
     }
 

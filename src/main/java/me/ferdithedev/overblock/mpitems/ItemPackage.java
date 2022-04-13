@@ -10,7 +10,7 @@ public class ItemPackage {
 
     private final String name;
     private final Material icon;
-    private final List<MPItem> items;
+    private final List<OBItem> items;
     private final JavaPlugin plugin;
     private final String[] description;
     private final String internalName;
@@ -25,7 +25,7 @@ public class ItemPackage {
         this.description = description != null ? description : new String[]{};
     }
 
-    public ItemPackage(JavaPlugin plugin, String internalName, String name, Material icon, List<MPItem> items, String... description) {
+    public ItemPackage(JavaPlugin plugin, String internalName, String name, Material icon, List<OBItem> items, String... description) {
         this.name = name;
         this.icon = icon;
         this.items = items;
@@ -35,11 +35,11 @@ public class ItemPackage {
         this.description = description != null ? description : new String[]{};
     }
 
-    public void addItem(MPItem item) {
+    public void addItem(OBItem item) {
         if(!items.contains(item))items.add(item);
     }
 
-    public void removeItem(MPItem item) {
+    public void removeItem(OBItem item) {
         items.remove(item);
     }
 
@@ -55,7 +55,7 @@ public class ItemPackage {
         return icon;
     }
 
-    public List<MPItem> getItems() {
+    public List<OBItem> getItems() {
         return items;
     }
 

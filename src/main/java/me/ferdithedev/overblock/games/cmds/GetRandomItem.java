@@ -1,7 +1,7 @@
 package me.ferdithedev.overblock.games.cmds;
 
 import me.ferdithedev.overblock.games.ItemSpawner;
-import me.ferdithedev.overblock.mpitems.MPItem;
+import me.ferdithedev.overblock.mpitems.OBItem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,7 @@ public class GetRandomItem implements CommandExecutor {
                     i = 0;
                 }
 
-                MPItem item = ItemSpawner.getItem(i);
+                OBItem item = ItemSpawner.getItem(i);
                 if(item == null) return false;
                 p.getInventory().addItem(item.getItemStack());
                 p.sendMessage("§aYou got " + item.getName() + " §awith luck of §3" + i);

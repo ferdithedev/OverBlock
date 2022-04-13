@@ -7,7 +7,7 @@ import me.ferdithedev.overblock.games.GameManager;
 import me.ferdithedev.overblock.games.arena.better.LocalGameMap;
 import me.ferdithedev.overblock.games.cmds.SpawnBox;
 import me.ferdithedev.overblock.games.teams.TeamObject;
-import me.ferdithedev.overblock.mpitems.MPItemManager;
+import me.ferdithedev.overblock.mpitems.OBItemManager;
 import me.ferdithedev.overblock.mpitems.cmds.GetMPItem;
 import me.ferdithedev.overblock.games.arena.Arena;
 import me.ferdithedev.overblock.games.arena.Spawnpoint;
@@ -32,7 +32,7 @@ public final class OverBlock extends JavaPlugin {
     private static GameManager gameManager;
     public static Settings settings;
     public static List<TeamObject> teamObjects;
-    private static MPItemManager itemManager;
+    private static OBItemManager itemManager;
     public static File gameMapsFolder;
 
     public static final String PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GOLD + "OverBlock" + ChatColor.DARK_GREEN + "]" + ChatColor.RESET + " ";
@@ -60,7 +60,7 @@ public final class OverBlock extends JavaPlugin {
         Config teams =  new Config(this,"teams.yml", true);
         teamObjects = (List<TeamObject>) teams.get().get("Teams");
 
-        itemManager = new MPItemManager(this);
+        itemManager = new OBItemManager(this);
 
         Bukkit.getPluginManager().registerEvents(itemManager, this);
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
@@ -114,7 +114,7 @@ public final class OverBlock extends JavaPlugin {
         return gameManager;
     }
 
-    public static MPItemManager getMPItemManager() {
+    public static OBItemManager getMPItemManager() {
         return itemManager;
     }
 

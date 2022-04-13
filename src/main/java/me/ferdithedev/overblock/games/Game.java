@@ -237,7 +237,7 @@ public class Game {
         }
 
         if(winner == null) {
-            GameManager.gameBroadcast(participants,"§e§lWinner: " + "§c§lNO WINNER");
+            GameManager.gameBroadcast(participants,"§e§lWinner: §c§lNO WINNER");
         } else {
             GameManager.gameBroadcast(participants,"§e§lWinner: " + winner.getColor()+winner.getName());
         }

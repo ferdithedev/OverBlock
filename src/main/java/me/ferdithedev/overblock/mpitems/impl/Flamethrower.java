@@ -2,10 +2,10 @@ package me.ferdithedev.overblock.mpitems.impl;
 
 
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.MPItem;
-import me.ferdithedev.overblock.mpitems.MPItemManager;
-import me.ferdithedev.overblock.mpitems.MPItemRarity;
-import me.ferdithedev.overblock.mpitems.MPItemType;
+import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.mpitems.OBItemManager;
+import me.ferdithedev.overblock.mpitems.OBItemRarity;
+import me.ferdithedev.overblock.mpitems.OBItemType;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -17,10 +17,10 @@ import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
-public class Flamethrower extends MPItem {
+public class Flamethrower extends OBItem {
 
     public Flamethrower(JavaPlugin plugin) {
-        super(plugin, Material.IRON_AXE, "Flamethrower", 80, MPItemType.WEAPON, MPItemRarity.ULTIMATE, "§7Burn your opponents to §4DEATH");
+        super(plugin, Material.IRON_AXE, "Flamethrower", 80, OBItemType.WEAPON, OBItemRarity.ULTIMATE, "§7Burn your opponents to §4DEATH");
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Flamethrower extends MPItem {
             if(this.noCooldown(e.getPlayer())) {
                 this.function(e.getPlayer());
             } else {
-                MPItemManager.cooldownMessage(e.getPlayer());
+                OBItemManager.cooldownMessage(e.getPlayer());
             }
         }
         e.setCancelled(true);

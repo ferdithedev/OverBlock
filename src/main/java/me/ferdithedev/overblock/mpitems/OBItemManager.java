@@ -22,16 +22,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class MPItemManager implements Listener {
+public class OBItemManager implements Listener {
 
     private final Random random = new Random();
 
     private final List<ItemPackage> itemPackages = new ArrayList<>();
-    private final List<MPItem> allItems = new ArrayList<>();
+    private final List<OBItem> allItems = new ArrayList<>();
     private YamlConfiguration itemsConfig;
     private final File itemsFile;
 
-    public MPItemManager(JavaPlugin plugin) {
+    public OBItemManager(JavaPlugin plugin) {
         new Config(plugin,"items.yml", true);
         itemsFile = new File(plugin.getDataFolder(), "items.yml");
         itemsConfig = YamlConfiguration.loadConfiguration(itemsFile);
@@ -39,7 +39,7 @@ public class MPItemManager implements Listener {
         registerPresetMPItems(plugin);
     }
 
-    public List<MPItem> getMPItems() {
+    public List<OBItem> getMPItems() {
         return allItems;
     }
 
@@ -54,10 +54,10 @@ public class MPItemManager implements Listener {
         registerItemPackage(overBlock);
     }
 
-    public void changeItemEnabling(MPItem item, boolean enable) {
+    public void changeItemEnabling(OBItem item, boolean enable) {
         ItemPackage itemPackage = item.getItemPackage();
-        List<MPItem> items = itemPackage.getItems();
-        for(MPItem item1 : items) {
+        List<OBItem> items = itemPackage.getItems();
+        for(OBItem item1 : items) {
             if(item1.getInternalName().equals(item.getInternalName())) {
                 item1.setEnabled(enable);
                 getItemsConfig().set(item1.getItemPackage().getInternalName()+"."+item1.getInternalName()+".enabled",enable);
@@ -74,7 +74,7 @@ public class MPItemManager implements Listener {
 
     public void registerItemPackage(ItemPackage itemPackage) {
         itemPackages.add(itemPackage);
-        for(MPItem item : itemPackage.getItems()) {
+        for(OBItem item : itemPackage.getItems()) {
             String configPath = itemPackage.getInternalName()+"."+item.getInternalName()+".enabled";
 
             if(this.itemsConfig.contains(configPath)) {
@@ -93,7 +93,7 @@ public class MPItemManager implements Listener {
     }
 
     public void unregisterItemPackage(ItemPackage itemPackage) {
-        for(MPItem item : itemPackage.getItems()) {
+        for(OBItem item : itemPackage.getItems()) {
             allItems.remove(item);
             item.setItemPackage(null);
         }
@@ -114,27 +114,27 @@ public class MPItemManager implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1 , 0.8f);
     }
 
-    public MPItem getMPItemByInternalName(String internalName) {
-        for(MPItem item : allItems) {
+    public OBItem getMPItemByInternalName(String internalName) {
+        for(OBItem item : allItems) {
             if(item.getInternalName().equalsIgnoreCase(internalName)) return item;
         }
         return null;
     }
 
-    public MPItem getMPItemByItemStack(ItemStack itemStack) {
+    public OBItem getMPItemByItemStack(ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
         if(meta == null) return null;
-        for (MPItem mpitem : allItems) {
+        for (OBItem mpitem : allItems) {
             NamespacedKey key = new NamespacedKey(mpitem.getPlugin(),mpitem.getInternalName());
             if(meta.getPersistentDataContainer().has(key, PersistentDataType.BYTE)) return mpitem;
         }
         return null;
     }
 
-    public MPItem getRandomMPItemByRarity(MPItemRarity rarity) {
-        List<MPItem> items = new ArrayList<>(allItems);
+    public OBItem getRandomMPItemByRarity(OBItemRarity rarity) {
+        List<OBItem> items = new ArrayList<>(allItems);
         Collections.shuffle(items);
-        for(MPItem item : items) {
+        for(OBItem item : items) {
             if(item.isEnabled() && item.getRarity() == rarity) {
                 return item;
             }
@@ -146,7 +146,7 @@ public class MPItemManager implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if(e.getItem() == null) return;
-        MPItem mpitem = getMPItemByItemStack(e.getItem());
+        OBItem mpitem = getMPItemByItemStack(e.getItem());
         if(mpitem != null) {
             mpitem.click(e);
         }
@@ -158,7 +158,7 @@ public class MPItemManager implements Listener {
         OverBlock.print("Registered Items: ");
         for(ItemPackage itemPackage : itemPackages) {
             OverBlock.print("- " + itemPackage.getInternalName() + ":");
-            for(MPItem item : itemPackage.getItems()) {
+            for(OBItem item : itemPackage.getItems()) {
                 OverBlock.print("   " + item.getName());
             }
         }

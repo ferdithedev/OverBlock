@@ -1,7 +1,7 @@
 package me.ferdithedev.overblock.games;
 
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.MPItem;
+import me.ferdithedev.overblock.mpitems.OBItem;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -104,7 +104,7 @@ public class GameListeners implements Listener {
                     PersistentDataContainer container = itemMeta.getPersistentDataContainer();
                     if(container.has(boxkey, PersistentDataType.INTEGER)) {
                         int boxtype = container.get(boxkey,PersistentDataType.INTEGER);
-                        MPItem item = null;
+                        OBItem item = null;
                         for(int i = 0; i < eventItem.getAmount(); i++) {
                             switch (boxtype) {
                                 case 1: {

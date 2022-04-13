@@ -3,8 +3,8 @@ package me.ferdithedev.overblock.games;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.MPItem;
-import me.ferdithedev.overblock.mpitems.MPItemRarity;
+import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.mpitems.OBItemRarity;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,24 +75,24 @@ public class ItemSpawner {
         }
     }
 
-    public static MPItem getItem(int luck) {
-        MPItemRarity rarity = rarityBasedOnLuck(luck, null);
+    public static OBItem getItem(int luck) {
+        OBItemRarity rarity = rarityBasedOnLuck(luck, null);
         if(rarity==null)return null;
         return OverBlock.getMPItemManager().getRandomMPItemByRarity(rarity);
     }
 
-    private static MPItemRarity rarityBasedOnLuck(int luck, List<MPItemRarity> notPossible) {
+    private static OBItemRarity rarityBasedOnLuck(int luck, List<OBItemRarity> notPossible) {
         int i = random.nextInt(50);
         i -= luck;
-        List<MPItemRarity> rarities = new ArrayList<>(Arrays.asList(MPItemRarity.values()));
+        List<OBItemRarity> rarities = new ArrayList<>(Arrays.asList(OBItemRarity.values()));
         if(notPossible != null) rarities.removeAll(notPossible);
         if(rarities.isEmpty()){
             OverBlock.getInstance().getLogger().log(Level.WARNING,"WARNING! There are no items enabled in 'items.yml'");
             return null;
         }
         Collections.reverse(rarities);
-        MPItemRarity selected = null;
-        for(MPItemRarity rarity : rarities) {
+        OBItemRarity selected = null;
+        for(OBItemRarity rarity : rarities) {
             if(i < rarity.getChance()) {
                 selected = rarity;
                 break;

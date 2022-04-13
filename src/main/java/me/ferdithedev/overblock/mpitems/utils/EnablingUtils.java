@@ -2,7 +2,7 @@ package me.ferdithedev.overblock.mpitems.utils;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.mpitems.ItemPackage;
-import me.ferdithedev.overblock.mpitems.MPItem;
+import me.ferdithedev.overblock.mpitems.OBItem;
 import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -120,15 +120,15 @@ public class EnablingUtils implements Listener {
 
     private static void openItemList(Player p, ItemPackage itemPackage) {
         List<ItemStack[]> pages = new ArrayList<>();
-        List<MPItem> items = new ArrayList<>(itemPackage.getItems());
+        List<OBItem> items = new ArrayList<>(itemPackage.getItems());
 
         Inventory inventory = Bukkit.createInventory(null,3*9,itemPackage.getName());
 
         do {
             Inventory inventory_1 = Bukkit.createInventory(null,3*9," ");
             int i = 0;
-            List<MPItem> toRemove = new ArrayList<>();
-            for(MPItem item : items) {
+            List<OBItem> toRemove = new ArrayList<>();
+            for(OBItem item : items) {
                 if(i > 8) break;
                 toRemove.add(item);
                 inventory_1.setItem(i,ItemUtil.editPersistentDataContainerI(item.getItemStack(),"menuitem",PersistentDataType.BYTE,Byte.valueOf("1")));
@@ -211,7 +211,7 @@ public class EnablingUtils implements Listener {
         ItemStack i = e.getCurrentItem();
         if(i.getItemMeta() == null) return;
         if(!(e.getWhoClicked() instanceof Player player)) return;
-        List<MPItem> list = null;
+        List<OBItem> list = null;
         for(ItemPackage itemPackage : OverBlock.getMPItemManager().getItemPackages()) {
             String s = ItemUtil.getToggledItem(i,"packagename");
             if (s != null && s.equalsIgnoreCase(itemPackage.getInternalName())) {
@@ -233,7 +233,7 @@ public class EnablingUtils implements Listener {
         if(ItemUtil.isByte(i,"enabled")) {
             String internalItemName = ItemUtil.getToggledItem(i, "toggleitem");
             if(internalItemName != null) {
-                MPItem item = OverBlock.getMPItemManager().getMPItemByInternalName(internalItemName);
+                OBItem item = OverBlock.getMPItemManager().getMPItemByInternalName(internalItemName);
                 if(item != null) {
                     OverBlock.getMPItemManager().changeItemEnabling(item,false);
 
@@ -261,7 +261,7 @@ public class EnablingUtils implements Listener {
         if(ItemUtil.isByte(i,"disabled")) {
             String internalItemName = ItemUtil.getToggledItem(i, "toggleitem");
             if(internalItemName != null) {
-                MPItem item = OverBlock.getMPItemManager().getMPItemByInternalName(internalItemName);
+                OBItem item = OverBlock.getMPItemManager().getMPItemByInternalName(internalItemName);
                 if(item != null) {
                     OverBlock.getMPItemManager().changeItemEnabling(item,true);
 
