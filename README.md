@@ -90,7 +90,7 @@ The arguments of a MPItem are the following:
 
 #### Registering the item
 
-First, you have to create a ItemPackage which contains your new items.
+First, you have to create an ItemPackage which contains your new items.
 ```java
 ItemPackage magicWands = new ItemPackage(plugin, "magic_wands","§e§kM§r§d§lMagic Wands§r§e§kM§r", Material.STICK, "§eAdding some magic wands");
 ```
