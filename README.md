@@ -16,7 +16,7 @@ For a description of the gameplay take a look at the [website](https://ferdithed
 ### Setting up
 
 1. You have to restart your server one time after you loaded the plugin the first time so less bugs can occur!
-2. You will see that in the datafolder of the plugin a subfolder called `gameMaps/` is created. This is the folder where your maps a stored at. To add a map just put it into the folder. To register the arena you have to set some settings in the `arenas.yml` file which also should be created automatically:
+2. You will see that in the datafolder of the plugin a subfolder called `gameMaps/` is created. This is the folder where your maps are stored at. To add a map just put it into the folder. To register the arena you have to set some settings in the `arenas.yml` file which also should be created automatically:
 
 ![grafik](https://user-images.githubusercontent.com/69450649/163048980-fa189453-5450-4eef-822e-13e755d9e86b.png)
 
