@@ -48,7 +48,7 @@ You can use this example as a guide.
 
 #### Creating the item
 
-First you have to create a new class with is extending the MPItem class.
+First you have to create a new class wich is extending the MPItem class.
 
 ```java
 public class MagicWand extends MPItem {
