@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems;
+package me.ferdithedev.overblock.obitems;
 
 public enum OBItemType {
 

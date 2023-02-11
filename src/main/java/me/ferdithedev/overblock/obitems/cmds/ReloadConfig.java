@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems.cmds;
+package me.ferdithedev.overblock.obitems.cmds;
 
 import me.ferdithedev.overblock.OverBlock;
 import org.bukkit.command.Command;
@@ -10,7 +10,7 @@ public class ReloadConfig implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender.isOp()) {
-            OverBlock.getMPItemManager().reloadConfig();
+            OverBlock.getOBItemManager().reloadConfig();
         }
         return false;
     }

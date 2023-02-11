@@ -7,15 +7,15 @@ import me.ferdithedev.overblock.games.GameManager;
 import me.ferdithedev.overblock.games.arena.better.LocalGameMap;
 import me.ferdithedev.overblock.games.cmds.SpawnBox;
 import me.ferdithedev.overblock.games.teams.TeamObject;
-import me.ferdithedev.overblock.mpitems.OBItemManager;
-import me.ferdithedev.overblock.mpitems.cmds.GetMPItem;
+import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.cmds.GetOBItem;
 import me.ferdithedev.overblock.games.arena.Arena;
 import me.ferdithedev.overblock.games.arena.Spawnpoint;
 import me.ferdithedev.overblock.games.cmds.GetRandomItem;
 import me.ferdithedev.overblock.games.cmds.Skip;
-import me.ferdithedev.overblock.mpitems.cmds.ReloadConfig;
-import me.ferdithedev.overblock.mpitems.utils.EnablingUtils;
-import me.ferdithedev.overblock.mpitems.utils.UtilCommand;
+import me.ferdithedev.overblock.obitems.cmds.ReloadConfig;
+import me.ferdithedev.overblock.obitems.utils.EnablingUtils;
+import me.ferdithedev.overblock.obitems.utils.UtilCommand;
 import me.ferdithedev.overblock.util.BetterTeleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -67,8 +67,8 @@ public final class OverBlock extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
         Bukkit.getPluginManager().registerEvents(new EnablingUtils(),this);
 
-        getCommand("getmpitem").setExecutor(new GetMPItem());
-        getCommand("getmpitem").setTabCompleter(new GetMPItem());
+        getCommand("getmpitem").setExecutor(new GetOBItem());
+        getCommand("getmpitem").setTabCompleter(new GetOBItem());
 
         getCommand("skip").setExecutor(new Skip());
         getCommand("getrandomitem").setExecutor(new GetRandomItem());
@@ -114,7 +114,7 @@ public final class OverBlock extends JavaPlugin {
         return gameManager;
     }
 
-    public static OBItemManager getMPItemManager() {
+    public static OBItemManager getOBItemManager() {
         return itemManager;
     }
 

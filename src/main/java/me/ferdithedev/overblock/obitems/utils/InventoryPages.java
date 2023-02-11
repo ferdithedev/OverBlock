@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems.utils;
+package me.ferdithedev.overblock.obitems.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

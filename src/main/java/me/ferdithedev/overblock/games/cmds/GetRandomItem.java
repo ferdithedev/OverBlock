@@ -1,7 +1,7 @@
 package me.ferdithedev.overblock.games.cmds;
 
 import me.ferdithedev.overblock.games.ItemSpawner;
-import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.obitems.OBItem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,8 +11,7 @@ public class GetRandomItem implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(commandSender instanceof Player) {
-            Player p = (Player)commandSender;
+        if(commandSender instanceof Player p) {
             if(p.hasPermission("mp.getitem")) {
                 int i;
                 if(args.length == 1 && isNumeric(args[0])) {

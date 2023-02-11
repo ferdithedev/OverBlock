@@ -1,9 +1,9 @@
 package me.ferdithedev.overblock.api;
 
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.ItemPackage;
-import me.ferdithedev.overblock.mpitems.OBItemManager;
-import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.obitems.ItemPackage;
+import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.OBItem;
 
 /**
  * API of the OverBlock plugin
@@ -11,7 +11,7 @@ import me.ferdithedev.overblock.mpitems.OBItem;
  */
 public class MPAPI {
 
-    private static final OBItemManager manager = OverBlock.getMPItemManager();
+    private static final OBItemManager manager = OverBlock.getOBItemManager();
 
     /**
      * Register an ItemPackage which contains MPItems

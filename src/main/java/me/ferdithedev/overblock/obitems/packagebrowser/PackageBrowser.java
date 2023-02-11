@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems.packagebrowser;
+package me.ferdithedev.overblock.obitems.packagebrowser;
 
 import java.util.List;
 

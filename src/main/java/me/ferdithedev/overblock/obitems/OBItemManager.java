@@ -1,9 +1,9 @@
-package me.ferdithedev.overblock.mpitems;
+package me.ferdithedev.overblock.obitems;
 
 import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.impl.BoostStaff;
-import me.ferdithedev.overblock.mpitems.impl.Flamethrower;
+import me.ferdithedev.overblock.obitems.impl.BoostStaff;
+import me.ferdithedev.overblock.obitems.impl.Flamethrower;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -36,10 +36,10 @@ public class OBItemManager implements Listener {
         itemsFile = new File(plugin.getDataFolder(), "items.yml");
         itemsConfig = YamlConfiguration.loadConfiguration(itemsFile);
 
-        registerPresetMPItems(plugin);
+        registerPresetOBItems(plugin);
     }
 
-    public List<OBItem> getMPItems() {
+    public List<OBItem> getOBItems() {
         return allItems;
     }
 
@@ -47,7 +47,7 @@ public class OBItemManager implements Listener {
         return itemPackages;
     }
 
-    private void registerPresetMPItems(JavaPlugin plugin) {
+    private void registerPresetOBItems(JavaPlugin plugin) {
         ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, "§eDefault ItemPackage of OverBlock","§eJust the basics");
         overBlock.addItem(new BoostStaff(plugin));
         overBlock.addItem(new Flamethrower(plugin));
@@ -114,24 +114,24 @@ public class OBItemManager implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1 , 0.8f);
     }
 
-    public OBItem getMPItemByInternalName(String internalName) {
+    public OBItem getOBItemByInternalName(String internalName) {
         for(OBItem item : allItems) {
             if(item.getInternalName().equalsIgnoreCase(internalName)) return item;
         }
         return null;
     }
 
-    public OBItem getMPItemByItemStack(ItemStack itemStack) {
+    public OBItem getOBItemByItemStack(ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
         if(meta == null) return null;
-        for (OBItem mpitem : allItems) {
-            NamespacedKey key = new NamespacedKey(mpitem.getPlugin(),mpitem.getInternalName());
-            if(meta.getPersistentDataContainer().has(key, PersistentDataType.BYTE)) return mpitem;
+        for (OBItem obitem : allItems) {
+            NamespacedKey key = new NamespacedKey(obitem.getPlugin(),obitem.getInternalName());
+            if(meta.getPersistentDataContainer().has(key, PersistentDataType.BYTE)) return obitem;
         }
         return null;
     }
 
-    public OBItem getRandomMPItemByRarity(OBItemRarity rarity) {
+    public OBItem getRandomOBItemByRarity(OBItemRarity rarity) {
         List<OBItem> items = new ArrayList<>(allItems);
         Collections.shuffle(items);
         for(OBItem item : items) {
@@ -146,9 +146,9 @@ public class OBItemManager implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if(e.getItem() == null) return;
-        OBItem mpitem = getMPItemByItemStack(e.getItem());
-        if(mpitem != null) {
-            mpitem.click(e);
+        OBItem obitem = getOBItemByItemStack(e.getItem());
+        if(obitem != null) {
+            obitem.click(e);
         }
     }
 

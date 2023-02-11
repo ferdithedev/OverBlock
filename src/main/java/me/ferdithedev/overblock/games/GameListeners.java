@@ -1,7 +1,7 @@
 package me.ferdithedev.overblock.games;
 
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.OBItem;
+import me.ferdithedev.overblock.obitems.OBItem;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;

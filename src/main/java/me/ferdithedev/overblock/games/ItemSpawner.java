@@ -3,8 +3,8 @@ package me.ferdithedev.overblock.games;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.ferdithedev.overblock.OverBlock;
-import me.ferdithedev.overblock.mpitems.OBItem;
-import me.ferdithedev.overblock.mpitems.OBItemRarity;
+import me.ferdithedev.overblock.obitems.OBItem;
+import me.ferdithedev.overblock.obitems.OBItemRarity;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -78,7 +78,7 @@ public class ItemSpawner {
     public static OBItem getItem(int luck) {
         OBItemRarity rarity = rarityBasedOnLuck(luck, null);
         if(rarity==null)return null;
-        return OverBlock.getMPItemManager().getRandomMPItemByRarity(rarity);
+        return OverBlock.getOBItemManager().getRandomOBItemByRarity(rarity);
     }
 
     private static OBItemRarity rarityBasedOnLuck(int luck, List<OBItemRarity> notPossible) {
@@ -99,7 +99,7 @@ public class ItemSpawner {
             }
         }
 
-        if(selected != null && OverBlock.getMPItemManager().getRandomMPItemByRarity(selected) != null) {
+        if(selected != null && OverBlock.getOBItemManager().getRandomOBItemByRarity(selected) != null) {
             return selected;
         } else {
             if(notPossible == null) notPossible = new ArrayList<>();

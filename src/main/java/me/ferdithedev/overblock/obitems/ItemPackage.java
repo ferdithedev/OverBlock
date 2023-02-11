@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems;
+package me.ferdithedev.overblock.obitems;
 
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;

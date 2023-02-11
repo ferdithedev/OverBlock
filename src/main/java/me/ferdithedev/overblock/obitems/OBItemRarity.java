@@ -1,4 +1,4 @@
-package me.ferdithedev.overblock.mpitems;
+package me.ferdithedev.overblock.obitems;
 
 import me.ferdithedev.overblock.util.ChatUtil;
 import org.bukkit.ChatColor;

@@ -1,9 +1,9 @@
-package me.ferdithedev.overblock.mpitems.impl;
+package me.ferdithedev.overblock.obitems.impl;
 
-import me.ferdithedev.overblock.mpitems.OBItem;
-import me.ferdithedev.overblock.mpitems.OBItemManager;
-import me.ferdithedev.overblock.mpitems.OBItemRarity;
-import me.ferdithedev.overblock.mpitems.OBItemType;
+import me.ferdithedev.overblock.obitems.OBItem;
+import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.OBItemRarity;
+import me.ferdithedev.overblock.obitems.OBItemType;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
