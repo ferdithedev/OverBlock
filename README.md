@@ -48,13 +48,13 @@ You can use this example as a guide.
 
 #### Creating the item
 
-First you have to create a new class which is extending the MPItem class.
+First you have to create a new class which is extending the OBItem class.
 
 ```java
-public class MagicWand extends MPItem {
+public class MagicWand extends OBItem {
 
     public MagicWand(JavaPlugin plugin) {
-        super(plugin, Material.STICK, "Magic Wand", 40, MPItemType.WEAPON, MPItemRarity.SPECIAL, "§7Make some magic stuff (or staff???)");
+        super(plugin, Material.STICK, "Magic Wand", 40, OBItemType.WEAPON, OBItemRarity.SPECIAL, "§7Make some magic stuff (or staff???)");
     }
 
     @Override
@@ -69,14 +69,14 @@ public class MagicWand extends MPItem {
             if(this.noCooldown(e.getPlayer())) {
                 function(e.getPlayer());
             } else {
-                MPItemManager.cooldownMessage(e.getPlayer());
+                OBItemManager.cooldownMessage(e.getPlayer());
             }
         }
     }
 }
 ```
 
-The arguments of a MPItem are the following:
+The arguments of a OBItem are the following:
 
 |Argument             |Description                                                                                                               |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -84,8 +84,8 @@ The arguments of a MPItem are the following:
 |material   (Material)|The material your item is supposed to be                                                                                  |
 |name         (String)|The display name the item will have                                                                                       |
 |cooldown       (long)|The cooldown of the item                                                                                                  |
-|type     (MPItemType)|The type of the item (TURRET, TRAP, WEAPON, TOOL)                                                                         |
-|rarity  (MPItemRariy)|The rarity of the item which affects the coloring and possibility of getting one (COMMON, UNIQUE, EPIC, ULTIMATE, SPECIAL)|
+|type     (OBItemType)|The type of the item (TURRET, TRAP, WEAPON, TOOL)                                                                         |
+|rarity  (OBItemRariy)|The rarity of the item which affects the coloring and possibility of getting one (COMMON, UNIQUE, EPIC, ULTIMATE, SPECIAL)|
 |lore (String varargs)|Lore of the item                                                                                                          |
 
 #### Registering the item
@@ -100,7 +100,7 @@ magicWands.addItem(new MagicWand(ExamplePlugin.getInstance()));
 ```
 finally, you register the ItemPackage
 ```java
-MPAPI.registerItemPackage(magicWands);
+OBAPI.registerItemPackage(magicWands);
 ```
 
 Now you can use your items ingame :-)
@@ -117,7 +117,7 @@ With the `/items` command you can open a UI where all registered ItemPackages ar
 
 |Command                    |Function                       |
 |---------------------------|-------------------------------|
-|/getmpitem                 |Get a registered MPItem        |
+|/getobitem                 |Get a registered OBItem        |
 |/skip                      |Skips the lobby waiting time   |
 |/getrandomitem <luck (int)>|Get a random item              |
 |/reloaditems               |Reload items.yml               |

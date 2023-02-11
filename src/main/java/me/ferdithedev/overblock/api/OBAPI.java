@@ -9,7 +9,7 @@ import me.ferdithedev.overblock.obitems.OBItem;
  * API of the OverBlock plugin
  * @version 1.0
  */
-public class MPAPI {
+public class OBAPI {
 
     private static final OBItemManager manager = OverBlock.getOBItemManager();
 

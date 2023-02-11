@@ -67,8 +67,8 @@ public final class OverBlock extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
         Bukkit.getPluginManager().registerEvents(new EnablingUtils(),this);
 
-        getCommand("getmpitem").setExecutor(new GetOBItem());
-        getCommand("getmpitem").setTabCompleter(new GetOBItem());
+        getCommand("getobitem").setExecutor(new GetOBItem());
+        getCommand("getobitem").setTabCompleter(new GetOBItem());
 
         getCommand("skip").setExecutor(new Skip());
         getCommand("getrandomitem").setExecutor(new GetRandomItem());

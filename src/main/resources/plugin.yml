@@ -8,9 +8,9 @@ description: OverBlock
 softdepend:
   - Multiverse-Core
 commands:
-  getmpitem:
+  getobitem:
     description: Get a item
-    permission: overblock.getmpitem
+    permission: overblock.getobitem
   skip:
     description: Skip the waiting time
     permission: overblock.skip
