@@ -83,18 +83,22 @@ public class PackageBrowser {
         }
     }
 
-    private record OnlinePackage(String name, String author, String description, String url, JavaPlugin plugin) {
-        public void download() {
+    public record OnlinePackage(String name, String author, String description, String url, JavaPlugin plugin) {
+        public void download(Player downloader) {
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                downloader.sendMessage("§a§lINFO!§a Download started!");
                 try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
-                     FileOutputStream fileOutputStream = new FileOutputStream(plugin.getDataFolder().getParentFile().getAbsolutePath()+name+".jar")) {
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(plugin.getDataFolder().getParentFile().getAbsolutePath()+"/"+name+".jar")) {
                     byte[] dataBuffer = new byte[1024];
                     int bytesRead;
                     while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                         fileOutputStream.write(dataBuffer, 0, bytesRead);
                     }
+                    downloader.sendMessage("§a§lINFO!§a Download complete! Restart the server to load the package!");
                 } catch (IOException ignored) {
                     plugin.getLogger().log(Level.WARNING,"Failed to download package: " + name);
+                    downloader.sendMessage("§c§lERROR!§c Download for package '" + name + "' failed!");
                 }
             });
 
@@ -105,7 +109,10 @@ public class PackageBrowser {
         return onlinePackageList;
     }
 
-    public void openInventory(Player p) {
-
+    public OnlinePackage getPackageByName(String name) {
+        for(OnlinePackage onlinePackage : onlinePackageList) {
+            if(onlinePackage.name.equals(name)) return onlinePackage;
+        }
+        return null;
     }
 }
