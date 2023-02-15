@@ -9,7 +9,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class ItemUtil {
 
-    public static <T, Z> ItemStack editPersistentDataContainerI(ItemStack input, String keyString, PersistentDataType<T, Z> type, Z value) {
+    public static <T, Z> ItemStack setValue(ItemStack input, String keyString, PersistentDataType<T, Z> type, Z value) {
         ItemStack newItem = input.clone();
         ItemMeta fillerItemMeta = newItem.getItemMeta();
 
@@ -32,6 +32,31 @@ public class ItemUtil {
             return container.has(key, PersistentDataType.BYTE);
         }
         return false;
+    }
+
+    public static <T,Z> boolean hasValue(ItemStack i, String what, PersistentDataType<T,Z> type) {
+        if(!i.hasItemMeta()) return false;
+        NamespacedKey key = new NamespacedKey(OverBlock.getInstance(), what);
+        ItemMeta itemMeta = i.getItemMeta();
+        PersistentDataContainer container;
+        if (itemMeta != null) {
+            return itemMeta.getPersistentDataContainer().has(key,type);
+        }
+        return false;
+    }
+
+    public static <T,Z> Z getValue(ItemStack i, String what, PersistentDataType<T,Z> type) {
+        if(!i.hasItemMeta()) return null;
+        NamespacedKey key = new NamespacedKey(OverBlock.getInstance(), what);
+        ItemMeta itemMeta = i.getItemMeta();
+        PersistentDataContainer container;
+        if (itemMeta != null) {
+            container = itemMeta.getPersistentDataContainer();
+            if(container.has(key,type)) {
+                return container.get(key,type);
+            }
+        }
+        return null;
     }
 
     public static String getToggledItem(ItemStack i, String what) {

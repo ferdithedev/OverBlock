@@ -14,9 +14,10 @@ import me.ferdithedev.overblock.games.arena.Spawnpoint;
 import me.ferdithedev.overblock.games.cmds.GetRandomItem;
 import me.ferdithedev.overblock.games.cmds.Skip;
 import me.ferdithedev.overblock.obitems.cmds.ReloadConfig;
-import me.ferdithedev.overblock.obitems.utils.EnablingUtils;
-import me.ferdithedev.overblock.obitems.utils.UtilCommand;
+import me.ferdithedev.overblock.obitems.packagebrowser.BrowserCommand;
+import me.ferdithedev.overblock.obitems.manage.ItemsCommand;
 import me.ferdithedev.overblock.util.BetterTeleport;
+import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -65,7 +66,7 @@ public final class OverBlock extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(itemManager, this);
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
-        Bukkit.getPluginManager().registerEvents(new EnablingUtils(),this);
+        Bukkit.getPluginManager().registerEvents(new ListInventoryManager(itemManager),this);
 
         getCommand("getobitem").setExecutor(new GetOBItem());
         getCommand("getobitem").setTabCompleter(new GetOBItem());
@@ -74,7 +75,7 @@ public final class OverBlock extends JavaPlugin {
         getCommand("getrandomitem").setExecutor(new GetRandomItem());
 
         getCommand("reloaditems").setExecutor(new ReloadConfig());
-        getCommand("items").setExecutor(new UtilCommand());
+        getCommand("items").setExecutor(new ItemsCommand());
 
         getCommand("btp").setExecutor(new BetterTeleport());
         getCommand("btp").setTabCompleter(new BetterTeleport());
@@ -82,6 +83,8 @@ public final class OverBlock extends JavaPlugin {
         getCommand("spawnbox").setExecutor(new SpawnBox());
 
         getCommand("lobby").setExecutor(new LobbyCmd());
+
+        getCommand("browser").setExecutor(new BrowserCommand());
 
         if(settings.LOBBY != null) {
             gameManager = new GameManager(this, settings.LOBBY);

@@ -27,3 +27,4 @@ commands:
     description: Like normal /tp but with worlds
   spawnbox:
     description: Spawns box based on int
+  browser:

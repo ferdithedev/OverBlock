@@ -255,7 +255,7 @@ public class LobbyManager implements Listener {
             m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         i.setItemMeta(m);
-        i = ItemUtil.editPersistentDataContainerI(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
+        i = ItemUtil.setValue(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
         return i;
     }
 
@@ -269,7 +269,7 @@ public class LobbyManager implements Listener {
             m.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         i.setItemMeta(m);
-        i = ItemUtil.editPersistentDataContainerI(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
+        i = ItemUtil.setValue(i,"menuitem", PersistentDataType.BYTE,Byte.valueOf("1"));
         return i;
     }
 
