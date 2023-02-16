@@ -48,7 +48,7 @@ public class OBItemManager implements Listener {
     }
 
     private void registerPresetOBItems(JavaPlugin plugin) {
-        ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, "§eDefault ItemPackage of OverBlock","§eJust the basics");
+        ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, null, "§eDefault ItemPackage of OverBlock","§eJust the basics");
         overBlock.addItem(new BoostStaff(plugin));
         overBlock.addItem(new Flamethrower(plugin));
         registerItemPackage(overBlock);

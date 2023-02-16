@@ -1,5 +1,6 @@
 package me.ferdithedev.overblock.obitems;
 
+import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -71,9 +72,8 @@ public abstract class OBItem {
         m.setUnbreakable(true);
         m.setDisplayName(rarity.format(name));
         m.setLore(rarity.lore(lore));
-        NamespacedKey key = new NamespacedKey(plugin,internalName);
-        m.getPersistentDataContainer().set(key, PersistentDataType.BYTE, Byte.valueOf("1"));
         i.setItemMeta(m);
+        i = ItemUtil.setValue(i,internalName,PersistentDataType.BYTE, Byte.valueOf("1"));
         return i;
     }
 
