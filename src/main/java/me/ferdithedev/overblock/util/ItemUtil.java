@@ -22,18 +22,6 @@ public class ItemUtil {
         return newItem;
     }
 
-    public static boolean isByte(ItemStack i, String what) {
-        if(!i.hasItemMeta()) return false;
-        NamespacedKey key = new NamespacedKey(OverBlock.getInstance(), what);
-        ItemMeta itemMeta = i.getItemMeta();
-        PersistentDataContainer container;
-        if (itemMeta != null) {
-            container = itemMeta.getPersistentDataContainer();
-            return container.has(key, PersistentDataType.BYTE);
-        }
-        return false;
-    }
-
     public static <T,Z> boolean hasValue(ItemStack i, String what, PersistentDataType<T,Z> type) {
         if(!i.hasItemMeta()) return false;
         NamespacedKey key = new NamespacedKey(OverBlock.getInstance(), what);
@@ -55,19 +43,6 @@ public class ItemUtil {
             if(container.has(key,type)) {
                 return container.get(key,type);
             }
-        }
-        return null;
-    }
-
-    public static String getToggledItem(ItemStack i, String what) {
-        if(!i.hasItemMeta()) return null;
-        NamespacedKey key = new NamespacedKey(OverBlock.getInstance(), what);
-        ItemMeta itemMeta = i.getItemMeta();
-        PersistentDataContainer container;
-        if (itemMeta != null) {
-            container = itemMeta.getPersistentDataContainer();
-            if(!container.has(key,PersistentDataType.STRING)) return null;
-            return container.get(key, PersistentDataType.STRING);
         }
         return null;
     }
