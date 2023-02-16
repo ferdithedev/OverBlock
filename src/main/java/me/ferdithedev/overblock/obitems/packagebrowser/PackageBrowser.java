@@ -3,20 +3,24 @@ package me.ferdithedev.overblock.obitems.packagebrowser;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.util.invs.InventoryItemCreator;
 import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.stream.StreamSupport;
 
@@ -86,20 +90,33 @@ public class PackageBrowser {
     public record OnlinePackage(String name, String author, String description, String url, JavaPlugin plugin) {
         public void download(Player downloader) {
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                downloader.sendMessage("§a§lINFO!§a Download started!");
-                try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
+                AtomicBoolean installed = new AtomicBoolean(false);
+                AtomicBoolean finalInstalled = installed;
+                OverBlock.getOBItemManager().getItemPackages().stream().map(itemPackage -> new String[]{itemPackage.getName(), itemPackage.getInternalName()}).forEach(names -> {
+                    if(names[0].equalsIgnoreCase(name) || names[1].equalsIgnoreCase(name)) finalInstalled.set(false);
+                });
 
-                    FileOutputStream fileOutputStream = new FileOutputStream(plugin.getDataFolder().getParentFile().getAbsolutePath()+"/"+name+".jar")) {
-                    byte[] dataBuffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                        fileOutputStream.write(dataBuffer, 0, bytesRead);
+                installed = Arrays.stream(OverBlock.getInstance().getServer().getPluginManager().getPlugins()).map(Plugin::getName).anyMatch(s -> s.equalsIgnoreCase(name)) ? new AtomicBoolean(true) : installed;
+                installed = new File(plugin.getDataFolder().getParentFile().getAbsolutePath()+"/"+name+".jar").exists() ? new AtomicBoolean(true) : installed;
+
+                if(!installed.get()) {
+                    downloader.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "INFO! " + ChatColor.GREEN + "Starting download of package '" + name + "'!");
+                    try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
+
+                         FileOutputStream fileOutputStream = new FileOutputStream(plugin.getDataFolder().getParentFile().getAbsolutePath()+"/"+name+".jar")) {
+                        byte[] dataBuffer = new byte[1024];
+                        int bytesRead;
+                        while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                            fileOutputStream.write(dataBuffer, 0, bytesRead);
+                        }
+                        downloader.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "INFO! " + ChatColor.GREEN + "Download of package '" + name + "' complete! Restart the server to load the package!");
+                    } catch (IOException ignored) {
+                        plugin.getLogger().log(Level.WARNING,"Failed to download package: " + name);
+                        downloader.sendMessage("§c§lERROR!§c Download for package '" + name + "' failed!");
                     }
-                    downloader.sendMessage("§a§lINFO!§a Download complete! Restart the server to load the package!");
-                } catch (IOException ignored) {
-                    plugin.getLogger().log(Level.WARNING,"Failed to download package: " + name);
-                    downloader.sendMessage("§c§lERROR!§c Download for package '" + name + "' failed!");
-                }
+                } else
+                    downloader.sendMessage(ChatColor.of("#ff6e0d").toString() + ChatColor.BOLD + "INFO! " + ChatColor.of("#F76300").toString() + "Package '" + name + "' is already installed and won't be downloaded!");
+
             });
 
         }
