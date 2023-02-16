@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Flamethrower extends OBItem {
 
     public Flamethrower(JavaPlugin plugin) {
-        super(plugin, Material.IRON_AXE, "Flamethrower", 80, OBItemType.WEAPON, OBItemRarity.ULTIMATE, "§7Burn your opponents to §4DEATH");
+        super(plugin, Material.IRON_AXE, "Flamethrower", 70, OBItemType.WEAPON, OBItemRarity.ULTIMATE, "§7Burn your opponents to §4DEATH");
     }
 
     @Override

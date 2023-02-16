@@ -32,14 +32,6 @@ public class InventoryItemCreator {
         return this;
     }
 
-    public InventoryItemCreator addItemFlags(ItemFlag... itemFlags) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
-        itemMeta.addItemFlags(itemFlags);
-        itemStack.setItemMeta(itemMeta);
-        return this;
-    }
-
     public InventoryItemCreator addByte(String name, int value) {
         itemStack = ItemUtil.setValue(itemStack, name, PersistentDataType.BYTE,Byte.valueOf(String.valueOf(value)));
         return this;

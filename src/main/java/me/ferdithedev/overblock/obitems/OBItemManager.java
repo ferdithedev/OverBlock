@@ -4,6 +4,7 @@ import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.impl.BoostStaff;
 import me.ferdithedev.overblock.obitems.impl.Flamethrower;
+import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -48,7 +49,7 @@ public class OBItemManager implements Listener {
     }
 
     private void registerPresetOBItems(JavaPlugin plugin) {
-        ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, "§eDefault ItemPackage of OverBlock","§eJust the basics");
+        ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, null, "§eDefault ItemPackage of OverBlock","§eJust the basics");
         overBlock.addItem(new BoostStaff(plugin));
         overBlock.addItem(new Flamethrower(plugin));
         registerItemPackage(overBlock);

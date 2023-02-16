@@ -112,7 +112,7 @@ public class PackageBrowser {
                         downloader.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "INFO! " + ChatColor.GREEN + "Download of package '" + name + "' complete! Restart the server to load the package!");
                     } catch (IOException ignored) {
                         plugin.getLogger().log(Level.WARNING,"Failed to download package: " + name);
-                        downloader.sendMessage("§c§lERROR!§c Download for package '" + name + "' failed!");
+                        downloader.sendMessage("§c§lERROR!§c Download of package '" + name + "' failed!");
                     }
                 } else
                     downloader.sendMessage(ChatColor.of("#ff6e0d").toString() + ChatColor.BOLD + "INFO! " + ChatColor.of("#F76300").toString() + "Package '" + name + "' is already installed and won't be downloaded!");

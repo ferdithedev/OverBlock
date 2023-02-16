@@ -44,7 +44,6 @@ public class ListInventoryManager implements Listener {
                     new InventoryItemCreator(new ItemStack(itemPackage.getIcon()))
                             .setDisplayName(itemPackage.getName())
                             .setLore(description.toArray(new String[0]))
-                            .addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE)
                             .addString("packagename", itemPackage.getInternalName()).get()
             );
         }
