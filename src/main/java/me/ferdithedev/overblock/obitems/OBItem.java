@@ -1,11 +1,10 @@
 package me.ferdithedev.overblock.obitems;
 
-import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -71,13 +70,10 @@ public abstract class OBItem {
         if (m == null) return i;
         m.setUnbreakable(true);
         m.setDisplayName(rarity.format(name));
-        List<String> loreList = rarity.lore(lore);
-        String cd = cooldown == 0L ? "No cooldown" : cooldown / 20L + "s";
-        loreList.add(loreList.size()-1, "§8§oCooldown: " + cd);
-        m.setLore(loreList);
-        m.addItemFlags(ItemFlag.HIDE_ATTRIBUTES,ItemFlag.HIDE_UNBREAKABLE);
+        m.setLore(rarity.lore(lore));
+        NamespacedKey key = new NamespacedKey(plugin,internalName);
+        m.getPersistentDataContainer().set(key, PersistentDataType.BYTE, Byte.valueOf("1"));
         i.setItemMeta(m);
-        i = ItemUtil.setValue(i,internalName,PersistentDataType.BYTE, Byte.valueOf("1"));
         return i;
     }
 

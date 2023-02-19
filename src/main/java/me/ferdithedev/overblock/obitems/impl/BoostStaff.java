@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class BoostStaff extends OBItem {
 
     public BoostStaff(JavaPlugin plugin) {
-        super(plugin, Material.STICK, "Boost Staff", 0, OBItemType.TOOL, OBItemRarity.COMMON, "§7Rush to your opponents (or run away)");
+        super(plugin, Material.STICK, "Boost Staff", 40, OBItemType.WEAPON, OBItemRarity.COMMON, "§7Rush to your opponents (or run away)");
     }
 
     @Override
