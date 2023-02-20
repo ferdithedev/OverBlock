@@ -4,7 +4,8 @@ import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.impl.BoostStaff;
 import me.ferdithedev.overblock.obitems.impl.Flamethrower;
-import me.ferdithedev.overblock.util.ItemUtil;
+import me.ferdithedev.overblock.obitems.turrets.TurretManager;
+import me.ferdithedev.overblock.obitems.turrets.impl.TestTurret;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -12,6 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.inventory.ItemStack;
@@ -31,11 +33,13 @@ public class OBItemManager implements Listener {
     private final List<OBItem> allItems = new ArrayList<>();
     private YamlConfiguration itemsConfig;
     private final File itemsFile;
+    private final TurretManager turretManager;
 
     public OBItemManager(JavaPlugin plugin) {
         new Config(plugin,"items.yml", true);
         itemsFile = new File(plugin.getDataFolder(), "items.yml");
         itemsConfig = YamlConfiguration.loadConfiguration(itemsFile);
+        turretManager = new TurretManager();
 
         registerPresetOBItems(plugin);
     }
@@ -52,6 +56,7 @@ public class OBItemManager implements Listener {
         ItemPackage overBlock = new ItemPackage(plugin, "OverBlock","§e§kM§r§d§lOverBlock§r§e§kM§r", Material.IRON_AXE, null, "§eDefault ItemPackage of OverBlock","§eJust the basics");
         overBlock.addItem(new BoostStaff(plugin));
         overBlock.addItem(new Flamethrower(plugin));
+        overBlock.addItem(new TestTurret(plugin));
         registerItemPackage(overBlock);
     }
 
@@ -154,6 +159,11 @@ public class OBItemManager implements Listener {
     }
 
     @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) {
+        if(getOBItemByItemStack(e.getItemInHand()) != null) e.setCancelled(true);
+    }
+
+    @EventHandler
     public void onServerLoad(ServerLoadEvent e) {
         OverBlock.print("================");
         OverBlock.print("Registered Items: ");
@@ -181,5 +191,9 @@ public class OBItemManager implements Listener {
 
     public YamlConfiguration getItemsConfig() {
         return itemsConfig;
+    }
+
+    public TurretManager getTurretManager() {
+        return turretManager;
     }
 }

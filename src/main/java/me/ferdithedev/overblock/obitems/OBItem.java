@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -73,6 +74,7 @@ public abstract class OBItem {
         m.setLore(rarity.lore(lore));
         NamespacedKey key = new NamespacedKey(plugin,internalName);
         m.getPersistentDataContainer().set(key, PersistentDataType.BYTE, Byte.valueOf("1"));
+        m.addItemFlags(ItemFlag.HIDE_ATTRIBUTES,ItemFlag.HIDE_UNBREAKABLE);
         i.setItemMeta(m);
         return i;
     }

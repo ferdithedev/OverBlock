@@ -6,6 +6,7 @@ import me.ferdithedev.overblock.util.ItemUtil;
 import me.ferdithedev.overblock.util.invs.ListInventory;
 import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -29,7 +30,7 @@ public class PackageListInv extends ListInventory {
     }
 
     @Override
-    public void onItemClick(ItemStack i, Player clicker) {
+    public void onItemClick(ItemStack i, Player clicker, ClickType clickType) {
         if(ItemUtil.hasValue(i,"packagename", PersistentDataType.STRING)) {
             String packageName = ItemUtil.getValue(i,"packagename",PersistentDataType.STRING);
             for(ItemPackage itemPackage : OverBlock.getOBItemManager().getItemPackages()) {

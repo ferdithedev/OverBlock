@@ -21,6 +21,7 @@ import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -99,6 +100,7 @@ public final class OverBlock extends JavaPlugin {
             OverBlock.print("Deleting active world: " + map.getArena().getName());
             map.unload();
         }
+        getOBItemManager().getTurretManager().getArmorStands().forEach(a -> a.remove());
     }
 
     public static OverBlock getInstance() {

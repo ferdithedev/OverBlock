@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -84,7 +85,7 @@ public class ListInventoryManager implements Listener {
             }
             //trigger on item click
             if (ItemUtil.hasValue(clicked, "contentitem_id", PersistentDataType.INTEGER))
-                inventory.onItemClick(clicked, (Player) e.getWhoClicked());
+                inventory.onItemClick(clicked, (Player) e.getWhoClicked(), e.getClick());
 
             inventory.handleClick(e);
             e.setCancelled(true);

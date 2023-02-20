@@ -48,6 +48,10 @@ public class InventoryItemCreator {
     }
 
     public ItemStack get() {
+        ItemMeta meta = itemStack.getItemMeta();
+        assert meta != null;
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES,ItemFlag.HIDE_UNBREAKABLE);
+        itemStack.setItemMeta(meta);
         return ItemUtil.setValue(itemStack,"c_inv_item",PersistentDataType.BYTE,Byte.valueOf("1"));
     }
 }

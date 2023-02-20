@@ -6,6 +6,7 @@ import me.ferdithedev.overblock.util.ItemUtil;
 import me.ferdithedev.overblock.util.invs.ListInventory;
 import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -37,8 +38,10 @@ public class ItemListInv extends ListInventory {
     }
 
     @Override
-    public void onItemClick(ItemStack i, Player clicker) {
-
+    public void onItemClick(ItemStack i, Player clicker, ClickType clickType) {
+        if(clickType == ClickType.DOUBLE_CLICK) {
+            clicker.getInventory().addItem(OverBlock.getOBItemManager().getOBItemByItemStack(i).getItemStack());
+        }
     }
 
     @Override
