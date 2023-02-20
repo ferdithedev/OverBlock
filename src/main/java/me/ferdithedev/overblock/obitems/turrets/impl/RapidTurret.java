@@ -14,22 +14,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+public class RapidTurret extends Turret {
 
-public class TestTurret extends Turret {
-
-    public TestTurret(JavaPlugin plugin) {
-        super(plugin, Material.IRON_SWORD, "Test Turret", 200, OBItemRarity.EPIC, "Test test");
+    public RapidTurret(JavaPlugin plugin) {
+        super(plugin, Material.IRON_HOE, "Rapido", 200, OBItemRarity.SPECIAL, "§7A fast and strong turret");
     }
 
     @Override
     public void place(Player player, Block clickedBlock) {
         Location spawn = clickedBlock.getLocation().add(0.5,1,0.5);
         String name = player.getName().substring(player.getName().length()-1).equalsIgnoreCase("s") ? player.getName() + "'" : player.getName() + "'s";
-        name = name + " §d§lTest Turret";
-        ItemStack display = new ItemStack(Material.IRON_SWORD);
-        new PlacedTurret(this, player, spawn, name, display, 5, 7.5, 40);
+        name = name + " §7§lRapido";
+        ItemStack display = new ItemStack(Material.COAL_BLOCK);
+        new PlacedTurret(this, player, spawn, name, display, 30, 12, 2);
     }
 
     @Override
@@ -40,24 +37,25 @@ public class TestTurret extends Turret {
         armorStand.setInvisible(true);
         OverBlock.getOBItemManager().getTurretManager().getArmorStands().add(armorStand);
         //play sound
-        turretLoc.getWorld().getPlayers().stream().filter(p->turretLoc.distance(p.getLocation())<7.5).forEach(p->turretLoc.getWorld().playSound(p, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,1,2f));
+        turretLoc.getWorld().getPlayers().stream().filter(p->turretLoc.distance(p.getLocation())<12).forEach(p->{
+            turretLoc.getWorld().playSound(p, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,1,2f);
+            turretLoc.getWorld().playSound(p, Sound.BLOCK_STONE_HIT,1,2f);
+            turretLoc.getWorld().playSound(p, Sound.ENTITY_BLAZE_HURT,1,2f);
+        });
         //start runnables (repeating for following the player and one to kill the armor stand when not finding the target)
-        final Player[] targetP = {target};
+        Location targetLoc = target.getLocation();
         BukkitRunnable w = new BukkitRunnable() {
             @Override
             public void run() {
                 //moving armorstand towards player
-                Player nearest = getNearestPlayer(turretLoc);
-                if(nearest != null) targetP[0] = nearest;
-                Vector direction = targetP[0].getLocation().toVector().subtract(armorStand.getLocation().toVector());
+                Vector direction = targetLoc.toVector().subtract(armorStand.getLocation().toVector());
                 direction.normalize();
-                armorStand.setVelocity(direction.multiply(0.25));
+                armorStand.setVelocity(direction.multiply(0.5));
                 //spawn particle trail
-                Particle.DustTransition dustOptions = new Particle.DustTransition(Color.fromRGB(198,74,255), Color.fromRGB(20, 255, 247), 1f);
-                armorStand.getWorld().spawnParticle(Particle.DUST_COLOR_TRANSITION,armorStand.getLocation().add(0,1,0),10, dustOptions);
+                armorStand.getWorld().spawnParticle(Particle.SMOKE_NORMAL,armorStand.getLocation().add(0,1,0),10,0,0,0,0);
                 //hit execution
-                if(armorStand.getLocation().distance(targetP[0].getLocation()) < 1) {
-                    targetP[0].damage(2,attacker);
+                if(armorStand.getLocation().distance(target.getLocation()) < 1) {
+                    target.damage(3,attacker);
                     OverBlock.getOBItemManager().getTurretManager().getArmorStands().remove(armorStand);
                     armorStand.remove();
                     cancel();
@@ -68,7 +66,7 @@ public class TestTurret extends Turret {
         Bukkit.getScheduler().runTaskLater(OverBlock.getInstance(), () -> {
             w.cancel();
             armorStand.remove();
-        }, 200);
+        }, 40);
     }
 
     double multiplier = 0;
@@ -83,19 +81,11 @@ public class TestTurret extends Turret {
         double sin = r * Math.sin(multiplier);
         assert loc.getWorld() != null;
         //loc.getWorld().spawnParticle(Particle.REDSTONE,particleLocation.clone().add(cos,sin+0.75,sin),5,new Particle.DustOptions(Color.fromRGB(209, 255, 253),1f));
-        loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(r * Math.cos(multiplier),sin+1,sin),1,0,0,0,0);
-        loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(r * Math.cos(multiplier + Math.PI),sin+1,r * Math.sin(multiplier + Math.PI)),1,0,0,0,0);
-        loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(-r * Math.cos(multiplier),sin+1,sin),1,0,0,0,0);
-        loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(-r * Math.cos(multiplier + Math.PI),sin+1,r * Math.sin(multiplier + Math.PI)),1,0,0,0,0);
+        loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL,turret.getLocation().clone().add(r * Math.cos(multiplier),sin+1,sin),1,0,0,0,0);
+        loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL,turret.getLocation().clone().add(r * Math.cos(multiplier + Math.PI),sin+1,r * Math.sin(multiplier + Math.PI)),1,0,0,0,0);
+        //loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(-r * Math.cos(multiplier),sin+1,sin),1,0,0,0,0);
+        //loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK,turret.getLocation().clone().add(-r * Math.cos(multiplier + Math.PI),sin+1,r * Math.sin(multiplier + Math.PI)),1,0,0,0,0);
         multiplier += Math.PI/16;
     }
 
-    private static Player getNearestPlayer(Location location) {
-        World world = location.getWorld();
-        assert world != null;
-        ArrayList<Player> playersInWorld = new ArrayList<>(world.getEntitiesByClass(Player.class));
-        if (playersInWorld.size() == 1) return null;
-        playersInWorld.sort(Comparator.comparingDouble(o -> o.getLocation().distanceSquared(location)));
-        return playersInWorld.get(0);
-    }
 }

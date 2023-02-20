@@ -1,11 +1,14 @@
 package me.ferdithedev.overblock.obitems.turrets;
 
 import me.ferdithedev.overblock.OverBlock;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TurretManager {
@@ -21,24 +24,23 @@ public class TurretManager {
                 for (int i = 0; i < placedTurrets.size(); i++) {
                     PlacedTurret turret = placedTurrets.get(i);
                     turret.getTurret().tick(turret);
-                    assert turret.getLocation().getWorld() != null;
-                    List<Player> players = turret.getLocation().getWorld().getPlayers();
-                    for (Player player : players) {
-                        if(ticksRunning - turret.getLastTimeShooted() >= turret.getShootCooldown()) {
-                            //if(!player.equals(turret.getPlayer())) {
-                                if (turret.getLocation().distance(player.getLocation()) < turret.getMaxDistance()) {
-                                    turret.getTurret().shoot(turret.getPlayer(), turret.getLocation(), player);
-                                    turret.setLastTimeShooted(ticksRunning);
-                                    break;
-                                }
-                            //}
+                    Player player = getNearestPlayer(turret.getLocation());
+                    //if(!player.equals(turret.getPlayer())) {
+                    if (player != null) {
+
+                        if (ticksRunning - turret.getLastTimeShooted() >= turret.getShootCooldown()) {
+                            if (turret.getLocation().distance(player.getLocation()) < turret.getMaxDistance()) {
+                                turret.getTurret().shoot(turret.getPlayer(), turret.getLocation(), player);
+                                turret.setLastTimeShooted(ticksRunning);
+                            }
                         }
                     }
+                    //}
                 }
                 ticksRunning++;
             }
         };
-        ticker.runTaskTimer(OverBlock.getInstance(),0,1);
+        ticker.runTaskTimer(OverBlock.getInstance(), 0, 1);
     }
 
     public void addTurret(PlacedTurret turret) {
@@ -51,5 +53,14 @@ public class TurretManager {
 
     public List<ArmorStand> getArmorStands() {
         return armorStands;
+    }
+
+    private static Player getNearestPlayer(Location location) {
+        World world = location.getWorld();
+        assert world != null;
+        ArrayList<Player> playersInWorld = new ArrayList<>(world.getEntitiesByClass(Player.class));
+        if(playersInWorld.size() == 0) return null;
+        playersInWorld.sort(Comparator.comparingDouble(o -> o.getLocation().distanceSquared(location)));
+        return playersInWorld.get(0);
     }
 }

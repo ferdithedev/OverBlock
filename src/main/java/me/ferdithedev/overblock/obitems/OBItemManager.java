@@ -5,6 +5,7 @@ import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.impl.BoostStaff;
 import me.ferdithedev.overblock.obitems.impl.Flamethrower;
 import me.ferdithedev.overblock.obitems.turrets.TurretManager;
+import me.ferdithedev.overblock.obitems.turrets.impl.RapidTurret;
 import me.ferdithedev.overblock.obitems.turrets.impl.TestTurret;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -57,6 +58,7 @@ public class OBItemManager implements Listener {
         overBlock.addItem(new BoostStaff(plugin));
         overBlock.addItem(new Flamethrower(plugin));
         overBlock.addItem(new TestTurret(plugin));
+        overBlock.addItem(new RapidTurret(plugin));
         registerItemPackage(overBlock);
     }
 

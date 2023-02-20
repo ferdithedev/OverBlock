@@ -72,10 +72,11 @@ public class PlacedTurret {
     public void setLastTimeShooted(long lastTimeShooted) {
         this.lastTimeShooted = lastTimeShooted;
         timesShooted++;
-        armorStand.teleport(armorStand.getLocation().subtract(0,0.6 / maxShots,0));        if(timesShooted >= maxShots) {
+        armorStand.teleport(armorStand.getLocation().subtract(0, 0.6 / maxShots, 0));
+        if (timesShooted >= maxShots) {
             assert location.getWorld() != null;
-            location.getWorld().getPlayers().stream().filter(p->location.distance(p.getLocation())<5).forEach(p->location.getWorld().playSound(p,Sound.ENTITY_ITEM_BREAK,1,1));
-            location.getWorld().spawnParticle(Particle.SMOKE_LARGE,location,200,0,0,0,0.1);
+            location.getWorld().getPlayers().stream().filter(p -> location.distance(p.getLocation()) < maxDistance).forEach(p -> location.getWorld().playSound(p, Sound.ENTITY_ITEM_BREAK, 1, 1));
+            location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 200, 0, 0, 0, 0.1);
             player.sendMessage("§c§lYour " + turret.getName() + " fired it's last shot!");
             OverBlock.getOBItemManager().getTurretManager().removeTurret(this);
             OverBlock.getOBItemManager().getTurretManager().getArmorStands().remove(armorStand);
