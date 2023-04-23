@@ -3,7 +3,6 @@ package me.ferdithedev.overblock.obitems.impl;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.OBItem;
-import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
 import me.ferdithedev.overblock.util.Effects;
@@ -11,8 +10,6 @@ import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
