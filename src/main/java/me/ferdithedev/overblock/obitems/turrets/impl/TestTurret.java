@@ -4,6 +4,8 @@ import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.turrets.PlacedTurret;
 import me.ferdithedev.overblock.obitems.turrets.Turret;
+import me.ferdithedev.overblock.obitems.turrets.TurretManager;
+import me.ferdithedev.overblock.util.Effects;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -20,7 +22,7 @@ import java.util.Comparator;
 public class TestTurret extends Turret {
 
     public TestTurret(JavaPlugin plugin) {
-        super(plugin, Material.IRON_SWORD, "Test Turret", 200, OBItemRarity.EPIC, "Test test");
+        super(plugin, Material.IRON_SWORD, "Test Turret", 200, OBItemRarity.EPIC, "§r§7Test test");
     }
 
     @Override
@@ -38,9 +40,10 @@ public class TestTurret extends Turret {
         //spawn "rocket"
         ArmorStand armorStand = (ArmorStand) turretLoc.getWorld().spawnEntity(turretLoc, EntityType.ARMOR_STAND);
         armorStand.setInvisible(true);
-        OverBlock.getOBItemManager().getTurretManager().getArmorStands().add(armorStand);
+        TurretManager.getArmorStands().add(armorStand);
         //play sound
-        turretLoc.getWorld().getPlayers().stream().filter(p->turretLoc.distance(p.getLocation())<7.5).forEach(p->turretLoc.getWorld().playSound(p, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,1,2f));
+        //turretLoc.getWorld().getPlayers().stream().filter(p->turretLoc.distance(p.getLocation())<7.5).forEach(p->turretLoc.getWorld().playSound(p, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,1,2f));
+        Effects.playSoundDistance(turretLoc,7.5,Sound.ENTITY_FIREWORK_ROCKET_LAUNCH,1,2f);
         //start runnables (repeating for following the player and one to kill the armor stand when not finding the target)
         final Player[] targetP = {target};
         BukkitRunnable w = new BukkitRunnable() {
@@ -58,7 +61,7 @@ public class TestTurret extends Turret {
                 //hit execution
                 if(armorStand.getLocation().distance(targetP[0].getLocation()) < 1) {
                     targetP[0].damage(2,attacker);
-                    OverBlock.getOBItemManager().getTurretManager().getArmorStands().remove(armorStand);
+                    TurretManager.getArmorStands().remove(armorStand);
                     armorStand.remove();
                     cancel();
                 }

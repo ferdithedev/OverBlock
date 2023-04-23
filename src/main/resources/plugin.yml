@@ -28,3 +28,4 @@ commands:
   spawnbox:
     description: Spawns box based on int
   browser:
+    description: Open the item package browser

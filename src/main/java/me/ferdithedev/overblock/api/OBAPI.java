@@ -2,7 +2,7 @@ package me.ferdithedev.overblock.api;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.ItemPackage;
-import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItem;
 
 /**
@@ -11,7 +11,7 @@ import me.ferdithedev.overblock.obitems.OBItem;
  */
 public class OBAPI {
 
-    private static final OBItemManager manager = OverBlock.getOBItemManager();
+    private static final ItemManager manager = OverBlock.getItemManager();
 
     /**
      * Register an ItemPackage which contains MPItems
@@ -21,6 +21,7 @@ public class OBAPI {
      */
     public static void registerItemPackage(ItemPackage itemPackage) {
         manager.registerItemPackage(itemPackage);
+        OverBlock.getListInventoryManager().initPackageList(OverBlock.getItemManager());
     }
 
     /**

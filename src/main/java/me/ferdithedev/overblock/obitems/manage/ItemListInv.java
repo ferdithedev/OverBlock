@@ -21,9 +21,9 @@ public class ItemListInv extends ListInventory {
     public void onItemEnable(ItemStack i) {
         if(!ItemUtil.hasValue(i,"internalname", PersistentDataType.STRING)) return;
         String internalName = ItemUtil.getValue(i,"internalname",PersistentDataType.STRING);
-        OBItem item = OverBlock.getOBItemManager().getOBItemByInternalName(internalName);
+        OBItem item = OverBlock.getItemManager().getOBItemByInternalName(internalName);
         if(item != null) {
-            OverBlock.getOBItemManager().changeItemEnabling(item,true);
+            OverBlock.getItemManager().changeItemEnabling(item,true);
         }
     }
 
@@ -31,16 +31,16 @@ public class ItemListInv extends ListInventory {
     public void onItemDisable(ItemStack i) {
         if(!ItemUtil.hasValue(i,"internalname", PersistentDataType.STRING)) return;
         String internalName = ItemUtil.getValue(i,"internalname",PersistentDataType.STRING);
-        OBItem item = OverBlock.getOBItemManager().getOBItemByInternalName(internalName);
+        OBItem item = OverBlock.getItemManager().getOBItemByInternalName(internalName);
         if(item != null) {
-            OverBlock.getOBItemManager().changeItemEnabling(item,false);
+            OverBlock.getItemManager().changeItemEnabling(item,false);
         }
     }
 
     @Override
     public void onItemClick(ItemStack i, Player clicker, ClickType clickType) {
         if(clickType == ClickType.DOUBLE_CLICK) {
-            clicker.getInventory().addItem(OverBlock.getOBItemManager().getOBItemByItemStack(i).getItemStack());
+            clicker.getInventory().addItem(OverBlock.getItemManager().getOBItemByItemStack(i).getItemStack());
         }
     }
 

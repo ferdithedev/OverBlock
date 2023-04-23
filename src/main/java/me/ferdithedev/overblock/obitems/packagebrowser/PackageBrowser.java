@@ -92,7 +92,7 @@ public class PackageBrowser {
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 AtomicBoolean installed = new AtomicBoolean(false);
                 AtomicBoolean finalInstalled = installed;
-                OverBlock.getOBItemManager().getItemPackages().stream().map(itemPackage -> new String[]{itemPackage.getName(), itemPackage.getInternalName()}).forEach(names -> {
+                OverBlock.getItemManager().getItemPackages().stream().map(itemPackage -> new String[]{itemPackage.getName(), itemPackage.getInternalName()}).forEach(names -> {
                     if(names[0].equalsIgnoreCase(name) || names[1].equalsIgnoreCase(name)) finalInstalled.set(false);
                 });
 

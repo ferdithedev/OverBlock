@@ -18,7 +18,7 @@ public class GetOBItem implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
             if(args.length > 0) {
-                for(OBItem obitem : OverBlock.getOBItemManager().getOBItems()) {
+                for(OBItem obitem : OverBlock.getItemManager().getOBItems()) {
                     if(args[0].equalsIgnoreCase(obitem.getInternalName()) || args[0].equalsIgnoreCase(obitem.getItemPackage().getInternalName().toLowerCase() + ":" + obitem.getInternalName())) {
                         ((Player) sender).getInventory().addItem(obitem.getItemStack());
                         if(!obitem.isEnabled()) sender.sendMessage("§c§lWARINING! §cThis item is currently not available in-game since it's not enabled in the 'items.yml' at §e'" + obitem.getPlugin().getName() + "->" + obitem.getInternalName() + "->enabled'§c!");
@@ -32,7 +32,7 @@ public class GetOBItem implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> list = new ArrayList<>();
-        for(ItemPackage itemPackage : OverBlock.getOBItemManager().getItemPackages()) {
+        for(ItemPackage itemPackage : OverBlock.getItemManager().getItemPackages()) {
             for(OBItem item : itemPackage.getItems()) {
                 list.add(itemPackage.getInternalName().toLowerCase()+ ":" + item.getInternalName());
             }

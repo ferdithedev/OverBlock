@@ -10,7 +10,7 @@ public class ReloadConfig implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender.isOp()) {
-            OverBlock.getOBItemManager().reloadConfig();
+            OverBlock.getItemManager().reloadConfig();
         }
         return false;
     }

@@ -1,7 +1,7 @@
 package me.ferdithedev.overblock.obitems.turrets;
 
 import me.ferdithedev.overblock.obitems.OBItem;
-import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
 import org.bukkit.Location;
@@ -19,8 +19,8 @@ public abstract class Turret extends OBItem {
     }
 
     @Override
-    public void function(Player player) {
-
+    public boolean function(Player player) {
+        return true;
     }
 
     public abstract void place(Player player, Block clickedBlock);
@@ -36,7 +36,7 @@ public abstract class Turret extends OBItem {
                 if(this.noCooldown(e.getPlayer())) {
                     place(e.getPlayer(), e.getClickedBlock());
                 } else {
-                    OBItemManager.cooldownMessage(e.getPlayer());
+                    ItemManager.cooldownMessage(e.getPlayer());
                 }
             }
         }

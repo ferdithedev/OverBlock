@@ -1,9 +1,8 @@
 package me.ferdithedev.overblock.obitems;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -49,24 +48,37 @@ public abstract class OBItem {
 
     public boolean noCooldown(Player player) {
         if(cooldown > 0) {
-            if(!users.contains(player)) {
-                users.add(player);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> users.remove(player), cooldown);
-                return true;
-            } else {
-                return false;
-            }
+            return !users.contains(player);
         } else {
             return true;
         }
     }
 
-    public abstract void function(Player player);
+    private void addCooldown(Player player) {
+        if(!users.contains(player)) {
+            users.add(player);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> users.remove(player), cooldown);
+        }
+    }
 
-    public abstract void click(PlayerInteractEvent e);
+    public abstract boolean function(Player player);
+
+    public void click(PlayerInteractEvent e) {
+        if(e.getAction() == Action.RIGHT_CLICK_AIR) {
+            if(noCooldown(e.getPlayer())) {
+                if(function(e.getPlayer())) {
+                    addCooldown(e.getPlayer());
+                    if(e.getPlayer().getGameMode() != GameMode.CREATIVE) e.getPlayer().getInventory().removeItem(itemStack);
+                }
+            } else {
+                ItemManager.cooldownMessage(e.getPlayer());
+            }
+        }
+        e.setCancelled(true);
+    }
 
     private ItemStack setItemStack() {
-        ItemStack i = new ItemStack(material);
+        ItemStack i = new ItemStack(material, 1);
         ItemMeta m = i.getItemMeta();
         if (m == null) return i;
         m.setUnbreakable(true);

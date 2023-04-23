@@ -78,7 +78,7 @@ public class ItemSpawner {
     public static OBItem getItem(int luck) {
         OBItemRarity rarity = rarityBasedOnLuck(luck, null);
         if(rarity==null)return null;
-        return OverBlock.getOBItemManager().getRandomOBItemByRarity(rarity);
+        return OverBlock.getItemManager().getRandomOBItemByRarity(rarity);
     }
 
     private static OBItemRarity rarityBasedOnLuck(int luck, List<OBItemRarity> notPossible) {
@@ -99,7 +99,7 @@ public class ItemSpawner {
             }
         }
 
-        if(selected != null && OverBlock.getOBItemManager().getRandomOBItemByRarity(selected) != null) {
+        if(selected != null && OverBlock.getItemManager().getRandomOBItemByRarity(selected) != null) {
             return selected;
         } else {
             if(notPossible == null) notPossible = new ArrayList<>();

@@ -41,7 +41,7 @@ public class GameManager implements Listener {
         }
     }
 
-    public Game gamePlayerIsIn(Player p) {
+    public Game gameOfPlayer(Player p) {
         if(playerIsIngame(p)) {
             for(Game g : activeGames) {
                 if(g.getParticipants().contains(p)) {

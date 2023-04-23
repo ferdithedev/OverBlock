@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class TurretManager {
+public final class TurretManager {
 
-    private final List<PlacedTurret> placedTurrets = new ArrayList<>();
-    private final List<ArmorStand> armorStands = new ArrayList<>();
-    private long ticksRunning = 0;
+    private static final List<PlacedTurret> placedTurrets = new ArrayList<>();
+    private static final List<ArmorStand> armorStands = new ArrayList<>();
+    private static long ticksRunning = 0;
 
-    public TurretManager() {
+    static  {
         BukkitRunnable ticker = new BukkitRunnable() {
             @Override
             public void run() {
@@ -43,15 +43,15 @@ public class TurretManager {
         ticker.runTaskTimer(OverBlock.getInstance(), 0, 1);
     }
 
-    public void addTurret(PlacedTurret turret) {
+    public static void addTurret(PlacedTurret turret) {
         placedTurrets.add(turret);
     }
 
-    public void removeTurret(PlacedTurret turret) {
+    public static void removeTurret(PlacedTurret turret) {
         placedTurrets.remove(turret);
     }
 
-    public List<ArmorStand> getArmorStands() {
+    public static List<ArmorStand> getArmorStands() {
         return armorStands;
     }
 

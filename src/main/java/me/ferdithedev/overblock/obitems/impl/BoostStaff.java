@@ -1,14 +1,12 @@
 package me.ferdithedev.overblock.obitems.impl;
 
 import me.ferdithedev.overblock.obitems.OBItem;
-import me.ferdithedev.overblock.obitems.OBItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
+import me.ferdithedev.overblock.util.Effects;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
@@ -19,20 +17,11 @@ public class BoostStaff extends OBItem {
     }
 
     @Override
-    public void function(Player player) {
+    public boolean function(Player player) {
         Vector v = player.getLocation().getDirection().multiply(2);
         player.setVelocity(v);
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+        Effects.playSoundDistance(player.getLocation(),5f,Sound.ENTITY_ENDERMAN_TELEPORT,1,1);
+        return true;
     }
 
-    @Override
-    public void click(PlayerInteractEvent e) {
-        if(e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if(this.noCooldown(e.getPlayer())) {
-                function(e.getPlayer());
-            } else {
-                OBItemManager.cooldownMessage(e.getPlayer());
-            }
-        }
-    }
 }

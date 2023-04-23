@@ -3,9 +3,10 @@ package me.ferdithedev.overblock.obitems.impl;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.OBItem;
-import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
+import me.ferdithedev.overblock.util.Effects;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -24,8 +25,8 @@ public class Flamethrower extends OBItem {
     }
 
     @Override
-    public void function(Player player) {
-        int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(OverBlock.getInstance(), () -> {
+    public boolean function(Player player) {
+        int taskid = Bukkit.getScheduler().scheduleAsyncRepeatingTask(OverBlock.getInstance(), () -> {
             if(player.getInventory().getItemInMainHand().isSimilar(getItemStack())) {
                 int distance = 10;
                 Location origin = player.getEyeLocation();
@@ -33,7 +34,7 @@ public class Flamethrower extends OBItem {
                 direction.multiply(distance);
                 direction.normalize();
 
-                Objects.requireNonNull(origin.getWorld()).playSound(origin, Sound.ITEM_FIRECHARGE_USE, 1, 0);
+                Effects.playSoundDistance(origin,8,Sound.ITEM_FIRECHARGE_USE,1,0);
                 for (int i = 0; i < distance; i++) {
                     Location loc = origin.add(direction);
                     if(loc.getBlock().getType() != Material.AIR) {
@@ -68,18 +69,7 @@ public class Flamethrower extends OBItem {
             }
         }, 0, 10);
         Bukkit.getScheduler().scheduleSyncDelayedTask(OverBlock.getInstance(), () -> Bukkit.getScheduler().cancelTask(taskid), 40);
-    }
-
-    @Override
-    public void click(PlayerInteractEvent e) {
-        if(e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if(this.noCooldown(e.getPlayer())) {
-                this.function(e.getPlayer());
-            } else {
-                OBItemManager.cooldownMessage(e.getPlayer());
-            }
-        }
-        e.setCancelled(true);
+        return true;
     }
 
     public void placeTempFire(Location l, long t) {

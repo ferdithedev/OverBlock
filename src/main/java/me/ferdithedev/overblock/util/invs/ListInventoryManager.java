@@ -2,20 +2,17 @@ package me.ferdithedev.overblock.util.invs;
 
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.ItemPackage;
-import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.manage.ItemListInv;
 import me.ferdithedev.overblock.obitems.manage.PackageListInv;
 import me.ferdithedev.overblock.obitems.packagebrowser.PackageBrowser;
 import me.ferdithedev.overblock.obitems.packagebrowser.PackageBrowserInv;
 import me.ferdithedev.overblock.util.ItemUtil;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -26,7 +23,7 @@ public class ListInventoryManager implements Listener {
     public static Map<String, ListInventory> inventories = new HashMap<>();
     public static PackageBrowser packageBrowser;
 
-    public ListInventoryManager(OBItemManager itemManager) {
+    public ListInventoryManager(ItemManager itemManager) {
         initPackageList(itemManager);
         inventories.put("itemlistinv", new ItemListInv());
         inventories.put("packagebrowser",new PackageBrowserInv());
@@ -34,8 +31,8 @@ public class ListInventoryManager implements Listener {
         packageBrowser = new PackageBrowser(OverBlock.getInstance());
     }
 
-    private void initPackageList(OBItemManager itemManager) {
-        List<ItemPackage> itemPackages = new ArrayList<>(OverBlock.getOBItemManager().getItemPackages());
+    public void initPackageList(ItemManager itemManager) {
+        List<ItemPackage> itemPackages = new ArrayList<>(OverBlock.getItemManager().getItemPackages());
         List<ItemStack> itemStacks = new ArrayList<>();
         for (ItemPackage itemPackage : itemPackages) {
             List<String> description = new ArrayList<>(Arrays.asList(itemPackage.getDescription()));

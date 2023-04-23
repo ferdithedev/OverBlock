@@ -33,7 +33,7 @@ public class PackageListInv extends ListInventory {
     public void onItemClick(ItemStack i, Player clicker, ClickType clickType) {
         if(ItemUtil.hasValue(i,"packagename", PersistentDataType.STRING)) {
             String packageName = ItemUtil.getValue(i,"packagename",PersistentDataType.STRING);
-            for(ItemPackage itemPackage : OverBlock.getOBItemManager().getItemPackages()) {
+            for(ItemPackage itemPackage : OverBlock.getItemManager().getItemPackages()) {
                 assert packageName != null;
                 if (packageName.equalsIgnoreCase(itemPackage.getInternalName())) {
                     //open items

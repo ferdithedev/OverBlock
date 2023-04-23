@@ -1,6 +1,6 @@
 package me.ferdithedev.overblock.obitems.turrets;
 
-import me.ferdithedev.overblock.OverBlock;
+import me.ferdithedev.overblock.util.Effects;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -37,8 +37,8 @@ public class PlacedTurret {
         armorStand.setCustomNameVisible(true);
         assert armorStand.getEquipment() != null;
         armorStand.getEquipment().setHelmet(display);
-        OverBlock.getOBItemManager().getTurretManager().getArmorStands().add(armorStand);
-        OverBlock.getOBItemManager().getTurretManager().addTurret(this);
+        TurretManager.getArmorStands().add(armorStand);
+        TurretManager.addTurret(this);
     }
 
     public Location getLocation() {
@@ -75,11 +75,11 @@ public class PlacedTurret {
         armorStand.teleport(armorStand.getLocation().subtract(0, 0.6 / maxShots, 0));
         if (timesShooted >= maxShots) {
             assert location.getWorld() != null;
-            location.getWorld().getPlayers().stream().filter(p -> location.distance(p.getLocation()) < maxDistance).forEach(p -> location.getWorld().playSound(p, Sound.ENTITY_ITEM_BREAK, 1, 1));
+            Effects.playSoundDistance(location,maxDistance,Sound.ENTITY_ITEM_BREAK,1,1);
             location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 200, 0, 0, 0, 0.1);
             player.sendMessage("§c§lYour " + turret.getName() + " fired it's last shot!");
-            OverBlock.getOBItemManager().getTurretManager().removeTurret(this);
-            OverBlock.getOBItemManager().getTurretManager().getArmorStands().remove(armorStand);
+            TurretManager.removeTurret(this);
+            TurretManager.getArmorStands().remove(armorStand);
             armorStand.remove();
         }
     }

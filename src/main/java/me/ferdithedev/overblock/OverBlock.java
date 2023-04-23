@@ -7,7 +7,7 @@ import me.ferdithedev.overblock.games.GameManager;
 import me.ferdithedev.overblock.games.arena.better.LocalGameMap;
 import me.ferdithedev.overblock.games.cmds.SpawnBox;
 import me.ferdithedev.overblock.games.teams.TeamObject;
-import me.ferdithedev.overblock.obitems.OBItemManager;
+import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.cmds.GetOBItem;
 import me.ferdithedev.overblock.games.arena.Arena;
 import me.ferdithedev.overblock.games.arena.Spawnpoint;
@@ -16,12 +16,12 @@ import me.ferdithedev.overblock.games.cmds.Skip;
 import me.ferdithedev.overblock.obitems.cmds.ReloadConfig;
 import me.ferdithedev.overblock.obitems.packagebrowser.BrowserCommand;
 import me.ferdithedev.overblock.obitems.manage.ItemsCommand;
+import me.ferdithedev.overblock.obitems.turrets.TurretManager;
 import me.ferdithedev.overblock.util.BetterTeleport;
 import me.ferdithedev.overblock.util.invs.ListInventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -34,8 +34,9 @@ public final class OverBlock extends JavaPlugin {
     private static GameManager gameManager;
     public static Settings settings;
     public static List<TeamObject> teamObjects;
-    private static OBItemManager itemManager;
+    private static ItemManager itemManager;
     public static File gameMapsFolder;
+    public static ListInventoryManager listInventoryManager;
 
     public static final String PREFIX = ChatColor.DARK_GREEN + "[" + ChatColor.GOLD + "OverBlock" + ChatColor.DARK_GREEN + "]" + ChatColor.RESET + " ";
 
@@ -62,12 +63,13 @@ public final class OverBlock extends JavaPlugin {
         Config teams =  new Config(this,"teams.yml", true);
         teamObjects = (List<TeamObject>) teams.get().get("Teams");
 
-        itemManager = new OBItemManager(this);
+        itemManager = new ItemManager(this);
 
         Bukkit.getPluginManager().registerEvents(itemManager, this);
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getPluginManager().registerEvents(new GameListeners(), this);
-        Bukkit.getPluginManager().registerEvents(new ListInventoryManager(itemManager),this);
+        this.listInventoryManager = new ListInventoryManager(itemManager);
+        Bukkit.getPluginManager().registerEvents(listInventoryManager,this);
 
         getCommand("getobitem").setExecutor(new GetOBItem());
         getCommand("getobitem").setTabCompleter(new GetOBItem());
@@ -100,7 +102,7 @@ public final class OverBlock extends JavaPlugin {
             OverBlock.print("Deleting active world: " + map.getArena().getName());
             map.unload();
         }
-        getOBItemManager().getTurretManager().getArmorStands().forEach(a -> a.remove());
+        TurretManager.getArmorStands().forEach(a -> a.remove());
     }
 
     public static OverBlock getInstance() {
@@ -119,8 +121,11 @@ public final class OverBlock extends JavaPlugin {
         return gameManager;
     }
 
-    public static OBItemManager getOBItemManager() {
+    public static ItemManager getItemManager() {
         return itemManager;
     }
 
+    public static ListInventoryManager getListInventoryManager() {
+        return listInventoryManager;
+    }
 }

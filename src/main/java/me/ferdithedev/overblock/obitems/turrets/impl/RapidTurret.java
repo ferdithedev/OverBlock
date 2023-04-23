@@ -4,6 +4,8 @@ import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.turrets.PlacedTurret;
 import me.ferdithedev.overblock.obitems.turrets.Turret;
+import me.ferdithedev.overblock.obitems.turrets.TurretManager;
+import me.ferdithedev.overblock.util.Effects;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -17,7 +19,7 @@ import org.bukkit.util.Vector;
 public class RapidTurret extends Turret {
 
     public RapidTurret(JavaPlugin plugin) {
-        super(plugin, Material.IRON_HOE, "Rapido", 200, OBItemRarity.SPECIAL, "§7A fast and strong turret");
+        super(plugin, Material.IRON_HOE, "Rapido", 200, OBItemRarity.ULTIMATE, "§7A fast and strong turret");
     }
 
     @Override
@@ -35,13 +37,13 @@ public class RapidTurret extends Turret {
         //spawn "rocket"
         ArmorStand armorStand = (ArmorStand) turretLoc.getWorld().spawnEntity(turretLoc, EntityType.ARMOR_STAND);
         armorStand.setInvisible(true);
-        OverBlock.getOBItemManager().getTurretManager().getArmorStands().add(armorStand);
+        TurretManager.getArmorStands().add(armorStand);
         //play sound
-        turretLoc.getWorld().getPlayers().stream().filter(p->turretLoc.distance(p.getLocation())<12).forEach(p->{
-            turretLoc.getWorld().playSound(p, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,1,2f);
-            turretLoc.getWorld().playSound(p, Sound.BLOCK_STONE_HIT,1,2f);
-            turretLoc.getWorld().playSound(p, Sound.ENTITY_BLAZE_HURT,1,2f);
-        });
+
+        Effects.playSoundDistance(turretLoc,12,Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST,1,2f);
+        Effects.playSoundDistance(turretLoc,12,Sound.BLOCK_STONE_HIT,1,2f);
+        Effects.playSoundDistance(turretLoc,12,Sound.ENTITY_BLAZE_HURT,1,2f);
+
         //start runnables (repeating for following the player and one to kill the armor stand when not finding the target)
         Location targetLoc = target.getLocation();
         BukkitRunnable w = new BukkitRunnable() {
@@ -56,7 +58,7 @@ public class RapidTurret extends Turret {
                 //hit execution
                 if(armorStand.getLocation().distance(target.getLocation()) < 1) {
                     target.damage(3,attacker);
-                    OverBlock.getOBItemManager().getTurretManager().getArmorStands().remove(armorStand);
+                    TurretManager.getArmorStands().remove(armorStand);
                     armorStand.remove();
                     cancel();
                 }

@@ -25,12 +25,12 @@ public class GameListeners implements Listener {
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         if(OverBlock.getGameManager().playerIsIngame(e.getPlayer())) {
-            if(OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()) == null) return;
-            if(OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()).getArena() == null) return;
-            if(OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()).getArena().getWorld() == null) return;
-            if(OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()).getArena().getWorld().getName().equalsIgnoreCase(Objects.requireNonNull(e.getFrom().getWorld()).getName())) {
+            if(OverBlock.getGameManager().gameOfPlayer(e.getPlayer()) == null) return;
+            if(OverBlock.getGameManager().gameOfPlayer(e.getPlayer()).getArena() == null) return;
+            if(OverBlock.getGameManager().gameOfPlayer(e.getPlayer()).getArena().getWorld() == null) return;
+            if(OverBlock.getGameManager().gameOfPlayer(e.getPlayer()).getArena().getWorld().getName().equalsIgnoreCase(Objects.requireNonNull(e.getFrom().getWorld()).getName())) {
                 if(!e.getFrom().getWorld().equals(Objects.requireNonNull(e.getTo()).getWorld())) {
-                    quit(e.getPlayer(), OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()));
+                    quit(e.getPlayer(), OverBlock.getGameManager().gameOfPlayer(e.getPlayer()));
                 }
             }
         }
@@ -39,7 +39,7 @@ public class GameListeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         if(OverBlock.getGameManager().playerIsIngame(e.getPlayer())) {
-            quit(e.getPlayer(), OverBlock.getGameManager().gamePlayerIsIn(e.getPlayer()));
+            quit(e.getPlayer(), OverBlock.getGameManager().gameOfPlayer(e.getPlayer()));
         }
     }
 
@@ -49,11 +49,11 @@ public class GameListeners implements Listener {
             if(e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                 Player p = (Player)e.getEntity();
                 if(OverBlock.getGameManager().playerIsIngame(p)) {
-                    if(OverBlock.getGameManager().gamePlayerIsIn(p).isHardcore()) {
+                    if(OverBlock.getGameManager().gameOfPlayer(p).isHardcore()) {
                         e.setDamage(e.getFinalDamage()*2);
                     }
                     if(p.getHealth() - e.getFinalDamage() <= 0) {
-                        Game g = OverBlock.getGameManager().gamePlayerIsIn(p);
+                        Game g = OverBlock.getGameManager().gameOfPlayer(p);
                         e.setCancelled(true);
                         if(e.getDamager() instanceof Player) {
                             g.death(p, (Player) e.getDamager());
@@ -73,7 +73,7 @@ public class GameListeners implements Listener {
             if(OverBlock.getGameManager().playerIsIngame(p)) {
                 if(e.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                     if(e.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                        OverBlock.getGameManager().gamePlayerIsIn(p).death(p);
+                        OverBlock.getGameManager().gameOfPlayer(p).death(p);
                     } else {
                         e.setCancelled(true);
                     }
