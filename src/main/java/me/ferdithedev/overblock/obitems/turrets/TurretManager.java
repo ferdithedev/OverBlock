@@ -24,7 +24,7 @@ public final class TurretManager {
                 for (int i = 0; i < placedTurrets.size(); i++) {
                     PlacedTurret turret = placedTurrets.get(i);
                     turret.getTurret().tick(turret);
-                    Player player = getNearestPlayer(turret.getLocation());
+                    Player player = getNearestPlayer(turret,turret.getLocation());
                     //if(!player.equals(turret.getPlayer())) {
                     if (player != null) {
 
@@ -55,10 +55,11 @@ public final class TurretManager {
         return armorStands;
     }
 
-    private static Player getNearestPlayer(Location location) {
+    private static Player getNearestPlayer(PlacedTurret turret, Location location) {
         World world = location.getWorld();
         assert world != null;
         ArrayList<Player> playersInWorld = new ArrayList<>(world.getEntitiesByClass(Player.class));
+        playersInWorld.remove(turret.getPlayer());
         if(playersInWorld.size() == 0) return null;
         playersInWorld.sort(Comparator.comparingDouble(o -> o.getLocation().distanceSquared(location)));
         return playersInWorld.get(0);

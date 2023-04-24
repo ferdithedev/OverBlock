@@ -153,6 +153,7 @@ public class LobbyManager implements Listener {
             }
         };
         countdown.runTaskTimer(plugin, 0, 20);
+
     }
 
     private ItemStack iquit() {

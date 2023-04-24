@@ -4,6 +4,7 @@ import me.ferdithedev.overblock.obitems.OBItem;
 import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -35,6 +36,7 @@ public abstract class Turret extends OBItem {
             if(e.getBlockFace().equals(BlockFace.UP)) {
                 if(this.noCooldown(e.getPlayer())) {
                     place(e.getPlayer(), e.getClickedBlock());
+                    if(e.getPlayer().getGameMode() != GameMode.CREATIVE) e.getPlayer().getInventory().removeItem(getItemStack());
                 } else {
                     ItemManager.cooldownMessage(e.getPlayer());
                 }

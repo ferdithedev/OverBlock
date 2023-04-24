@@ -50,7 +50,7 @@ public class TestTurret extends Turret {
             @Override
             public void run() {
                 //moving armorstand towards player
-                Player nearest = getNearestPlayer(turretLoc);
+                Player nearest = getNearestPlayer(attacker,turretLoc);
                 if(nearest != null) targetP[0] = nearest;
                 Vector direction = targetP[0].getLocation().toVector().subtract(armorStand.getLocation().toVector());
                 direction.normalize();
@@ -93,11 +93,12 @@ public class TestTurret extends Turret {
         multiplier += Math.PI/16;
     }
 
-    private static Player getNearestPlayer(Location location) {
+    private static Player getNearestPlayer(Player player, Location location) {
         World world = location.getWorld();
         assert world != null;
         ArrayList<Player> playersInWorld = new ArrayList<>(world.getEntitiesByClass(Player.class));
-        if (playersInWorld.size() == 1) return null;
+        playersInWorld.remove(player);
+        if(playersInWorld.size() == 0) return null;
         playersInWorld.sort(Comparator.comparingDouble(o -> o.getLocation().distanceSquared(location)));
         return playersInWorld.get(0);
     }

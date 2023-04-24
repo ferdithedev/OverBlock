@@ -84,7 +84,7 @@ public class ListInventoryManager implements Listener {
             if (ItemUtil.hasValue(clicked, "contentitem_id", PersistentDataType.INTEGER))
                 inventory.onItemClick(clicked, (Player) e.getWhoClicked(), e.getClick());
 
-            inventory.handleClick(e);
+            if(inventory != null) inventory.handleClick(e);
             e.setCancelled(true);
         }
     }

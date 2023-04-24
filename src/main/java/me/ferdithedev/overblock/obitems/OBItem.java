@@ -1,6 +1,8 @@
 package me.ferdithedev.overblock.obitems;
 
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -86,6 +88,7 @@ public abstract class OBItem {
         m.setLore(rarity.lore(lore));
         NamespacedKey key = new NamespacedKey(plugin,internalName);
         m.getPersistentDataContainer().set(key, PersistentDataType.BYTE, Byte.valueOf("1"));
+        m.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("",0, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         m.addItemFlags(ItemFlag.HIDE_ATTRIBUTES,ItemFlag.HIDE_UNBREAKABLE);
         i.setItemMeta(m);
         return i;
