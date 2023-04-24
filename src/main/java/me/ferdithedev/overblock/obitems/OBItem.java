@@ -56,7 +56,7 @@ public abstract class OBItem {
         }
     }
 
-    private void addCooldown(Player player) {
+    public void addCooldown(Player player) {
         if(!users.contains(player)) {
             users.add(player);
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> users.remove(player), cooldown);
@@ -65,18 +65,12 @@ public abstract class OBItem {
 
     public abstract boolean function(Player player);
 
-    public void click(PlayerInteractEvent e) {
+    public boolean click(PlayerInteractEvent e) {
         if(e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if(noCooldown(e.getPlayer())) {
-                if(function(e.getPlayer())) {
-                    addCooldown(e.getPlayer());
-                    if(e.getPlayer().getGameMode() != GameMode.CREATIVE) e.getPlayer().getInventory().removeItem(itemStack);
-                }
-            } else {
-                ItemManager.cooldownMessage(e.getPlayer());
-            }
+            return function(e.getPlayer());
         }
         e.setCancelled(true);
+        return false;
     }
 
     private ItemStack setItemStack() {

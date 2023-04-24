@@ -1,10 +1,8 @@
 package me.ferdithedev.overblock.obitems.turrets;
 
 import me.ferdithedev.overblock.obitems.OBItem;
-import me.ferdithedev.overblock.obitems.ItemManager;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
 import me.ferdithedev.overblock.obitems.OBItemType;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,16 +29,14 @@ public abstract class Turret extends OBItem {
     public abstract void tick(PlacedTurret turret);
 
     @Override
-    public void click(PlayerInteractEvent e) {
+    public boolean click(PlayerInteractEvent e) {
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(e.getBlockFace().equals(BlockFace.UP)) {
-                if(this.noCooldown(e.getPlayer())) {
-                    place(e.getPlayer(), e.getClickedBlock());
-                    if(e.getPlayer().getGameMode() != GameMode.CREATIVE) e.getPlayer().getInventory().removeItem(getItemStack());
-                } else {
-                    ItemManager.cooldownMessage(e.getPlayer());
-                }
+                e.setCancelled(true);
+                place(e.getPlayer(),e.getClickedBlock());
+                return true;
             }
         }
+        return false;
     }
 }

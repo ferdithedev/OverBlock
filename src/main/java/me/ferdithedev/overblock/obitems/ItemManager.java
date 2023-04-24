@@ -6,6 +6,7 @@ import me.ferdithedev.overblock.obitems.impl.BoostStaff;
 import me.ferdithedev.overblock.obitems.impl.Flamethrower;
 import me.ferdithedev.overblock.obitems.turrets.impl.RapidTurret;
 import me.ferdithedev.overblock.obitems.turrets.impl.TestTurret;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -156,7 +157,20 @@ public class ItemManager implements Listener {
         if(e.getItem() == null) return;
         OBItem obitem = getOBItemByItemStack(e.getItem());
         if(obitem != null) {
-            obitem.click(e);
+            if(obitem.noCooldown(e.getPlayer())) {
+                if(obitem.click(e)) {
+                    if(e.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                        int slot = e.getPlayer().getInventory().getHeldItemSlot();
+                        ItemStack item = e.getPlayer().getInventory().getItem(slot);
+                        if(item != null) {
+                            item.setAmount(item.getAmount()-1);
+                            e.getPlayer().getInventory().setItem(slot,item);
+                        }
+                    }
+
+                    obitem.addCooldown(e.getPlayer());
+                }
+            } else cooldownMessage(e.getPlayer());
         }
     }
 

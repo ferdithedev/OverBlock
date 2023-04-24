@@ -24,7 +24,7 @@ public class Effects {
         private final double offsetX;
         private final double offsetY;
         private final double offsetZ;
-        private final Particle.DustOptions data;
+        private final Object data;
         private final double extra;
 
         public <T> ParticleEffectPart(Particle particle, int count, double offsetX, double offsetY, double offsetZ, @Nullable T data, double extra) {
@@ -34,11 +34,7 @@ public class Effects {
             this.offsetY = offsetY;
             this.offsetZ = offsetZ;
 
-            if(data != null) {
-                if(data instanceof Particle.DustOptions) {
-                    this.data = (Particle.DustOptions) data;
-                } else this.data = null;
-            } else this.data = null;
+            this.data = data;
 
             this.extra = extra;
         }
@@ -58,6 +54,17 @@ public class Effects {
     }
 
     public static void drawParticleLine(Location loc1, Location loc2, ParticleEffect effect, double stepDistance) {
+        Vector vector = loc2.toVector().subtract(loc1.toVector());
+        for(double i = 1; i <= loc1.distance(loc2); i += stepDistance) {
+            vector.multiply(i);
+            loc1.add(vector);
+            effect.spawn(loc1);
+            loc1.subtract(vector);
+            vector.normalize();
+        }
+    }
+
+    public static void drawParticleLine(Location loc1, Location loc2, ParticleEffectPart effect, double stepDistance) {
         Vector vector = loc2.toVector().subtract(loc1.toVector());
         for(double i = 1; i <= loc1.distance(loc2); i += stepDistance) {
             vector.multiply(i);
