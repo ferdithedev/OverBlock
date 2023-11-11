@@ -64,6 +64,7 @@ public class Game {
             p.sendMessage("§eYou died! §c"+lifes.get(p)+" §elifes remaining!");
         }
         Spawnpoint spawnpoint = arena.getArena().getSpawnpoint(teamOfPlayer(p));
+        assert spawnpoint != null;
         Location loc = new Location(arena.getWorld(), spawnpoint.getCord()[0],spawnpoint.getCord()[1],spawnpoint.getCord()[2],spawnpoint.getLooking()[0],spawnpoint.getLooking()[1]);
         p.teleport(loc);
         p.setHealth(20);
