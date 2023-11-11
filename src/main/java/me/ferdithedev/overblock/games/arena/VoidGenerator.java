@@ -15,7 +15,7 @@ public class VoidGenerator extends ChunkGenerator {
 
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        return Collections.<BlockPopulator>emptyList();
+        return Collections.emptyList();
     }
 
     @SuppressWarnings("deprecation")

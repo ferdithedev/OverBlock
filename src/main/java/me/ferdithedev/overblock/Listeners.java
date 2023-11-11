@@ -37,9 +37,9 @@ public class Listeners implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         if(e.getCause() == EntityDamageEvent.DamageCause.VOID) return;
-        /*if(e.getEntity().getWorld().equals(Objects.requireNonNull(OverBlock.settings.SPAWNLOCATION.getWorld()))) {
+        if(e.getEntity().getWorld().equals(Objects.requireNonNull(OverBlock.settings.SPAWNLOCATION.getWorld()))) {
             e.setCancelled(true);
-        }*/
+        }
     }
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {

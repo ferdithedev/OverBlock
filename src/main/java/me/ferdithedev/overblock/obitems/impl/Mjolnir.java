@@ -14,8 +14,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.RayTraceResult;
 
-import java.util.Objects;
-
 public class Mjolnir extends OBItem {
     public Mjolnir(JavaPlugin plugin) {
         super(plugin, Material.IRON_INGOT, "Mjolnir", 10, OBItemType.WEAPON, OBItemRarity.EPIC, "Made by the dwarfes Sindri and Brokk", "Weapon of the god of thunder, Thor");

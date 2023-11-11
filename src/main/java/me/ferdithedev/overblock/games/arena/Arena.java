@@ -4,10 +4,7 @@ import me.ferdithedev.overblock.games.teams.Team;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SerializableAs("Arena")
 public record Arena(String worldName, List<Spawnpoint> spawnpoints, String name, String creator,
@@ -82,7 +79,7 @@ public record Arena(String worldName, List<Spawnpoint> spawnpoints, String name,
 
     @Override
     public Map<String, Object> serialize() {
-        LinkedHashMap result = new LinkedHashMap();
+        Map<String, Object> result = new HashMap<>();
         result.put("world", worldName);
         result.put("spawnpoints", spawnpoints);
         result.put("name", name);

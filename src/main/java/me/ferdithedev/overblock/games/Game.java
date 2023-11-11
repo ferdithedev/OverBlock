@@ -85,6 +85,7 @@ public class Game {
             p.sendMessage("§eYou died! §c"+lifes.get(p)+" §elifes remaining!");
         }
         Spawnpoint spawnpoint = arena.getArena().getSpawnpoint(teamOfPlayer(p));
+        assert spawnpoint != null;
         Location loc = new Location(arena.getWorld(), spawnpoint.getCord()[0],spawnpoint.getCord()[1],spawnpoint.getCord()[2],spawnpoint.getLooking()[0],spawnpoint.getLooking()[1]);
         p.teleport(loc);
         p.setHealth(20);
@@ -177,6 +178,7 @@ public class Game {
         for(Team t : this.teams) {
             for(Player p : t.getMembers()) {
                 Spawnpoint spawnpoint = arena.getArena().getSpawnpoint(t);
+                assert spawnpoint != null;
                 Location loc = new Location(arena.getWorld(), spawnpoint.getCord()[0],spawnpoint.getCord()[1],spawnpoint.getCord()[2],spawnpoint.getLooking()[0],spawnpoint.getLooking()[1]);
                 p.teleport(loc);
                 if(isHardcore()) {
@@ -192,7 +194,7 @@ public class Game {
                 p.setFoodLevel(20);
                 p.setHealth(20);
                 String creator = arena.getArena().creator();
-                if(creator != null && !creator.strip().isEmpty()) p.sendMessage("§eMap build by: §c" + arena.getArena().creator());
+                if(creator != null && !creator.isBlank()) p.sendMessage("§eMap build by: §c" + arena.getArena().creator());
             }
         }
         state = GameManager.GameState.INGAME;
