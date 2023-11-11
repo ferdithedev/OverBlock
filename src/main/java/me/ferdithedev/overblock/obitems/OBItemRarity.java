@@ -42,7 +42,10 @@ public enum OBItemRarity {
 
     public List<String> lore(String[] list) {
         List<String> lore = new ArrayList<>();
-        Collections.addAll(lore, list);
+        lore.add("");
+        for(String s : list) {
+            lore.add("§7" + s);
+        }
         lore.add("");
         lore.add(name);
         return lore;

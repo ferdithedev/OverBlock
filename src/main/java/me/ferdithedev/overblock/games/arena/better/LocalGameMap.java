@@ -4,10 +4,7 @@ import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.games.arena.Arena;
 import me.ferdithedev.overblock.games.arena.Cuboid;
 import me.ferdithedev.overblock.util.FileUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,8 +47,10 @@ public class LocalGameMap implements GameMap{
             return false;
         }
 
+        WorldCreator c = new WorldCreator(activeWorldFolder.getName()).generator("VoidGen").type(WorldType.FLAT);
+
         this.bukkitWorld = Bukkit.createWorld(
-                new WorldCreator(activeWorldFolder.getName())
+                c
         );
 
         if(bukkitWorld != null) this.bukkitWorld.setAutoSave(false);
@@ -84,8 +83,8 @@ public class LocalGameMap implements GameMap{
     }
 
     public Cuboid getCuboid() {
-        Location loc1 = new Location(bukkitWorld,arena.getCuboidArenaCords()[0],arena.getCuboidArenaCords()[1],arena.getCuboidArenaCords()[2] );
-        Location loc2 = new Location(bukkitWorld,arena.getCuboidArenaCords()[3],arena.getCuboidArenaCords()[4],arena.getCuboidArenaCords()[5] );
+        Location loc1 = new Location(bukkitWorld,arena.cuboidArenaCords()[0],arena.cuboidArenaCords()[1],arena.cuboidArenaCords()[2] );
+        Location loc2 = new Location(bukkitWorld,arena.cuboidArenaCords()[3],arena.cuboidArenaCords()[4],arena.cuboidArenaCords()[5] );
         return new Cuboid(loc1,loc2);
     }
 }

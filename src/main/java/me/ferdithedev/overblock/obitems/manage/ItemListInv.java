@@ -46,7 +46,7 @@ public class ItemListInv extends ListInventory {
 
     @Override
     public void handleClick(InventoryClickEvent e) {
-        assert e.getCurrentItem() != null;
+        if(e.getCurrentItem() == null) return;
         if(ItemUtil.hasValue(e.getCurrentItem(),"close",PersistentDataType.BYTE)) {
             ListInventoryManager.inventories.get("packagelistinv").openInventory((Player) e.getWhoClicked(),0);
         }

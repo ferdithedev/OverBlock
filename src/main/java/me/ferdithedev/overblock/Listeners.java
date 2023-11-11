@@ -1,5 +1,6 @@
 package me.ferdithedev.overblock;
 
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -17,12 +18,14 @@ public class Listeners implements Listener {
         e.setJoinMessage(null);
         e.getPlayer().getInventory().clear();
         e.getPlayer().teleport(OverBlock.settings.SPAWNLOCATION);
+        e.getPlayer().setGameMode(GameMode.ADVENTURE);
     }
     @EventHandler
     public void onJoin(PlayerSpawnLocationEvent e) {
         e.setSpawnLocation(OverBlock.settings.SPAWNLOCATION);
         e.getPlayer().setFoodLevel(20);
         e.getPlayer().setHealth(20);
+        e.getPlayer().setGameMode(GameMode.ADVENTURE);
     }
     @EventHandler
     public void onHunger(FoodLevelChangeEvent e) {

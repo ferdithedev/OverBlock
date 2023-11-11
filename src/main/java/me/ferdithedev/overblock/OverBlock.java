@@ -1,9 +1,11 @@
 package me.ferdithedev.overblock;
 
+import me.ferdithedev.overblock.cmds.JoinCmd;
 import me.ferdithedev.overblock.cmds.LobbyCmd;
 import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.games.GameListeners;
 import me.ferdithedev.overblock.games.GameManager;
+import me.ferdithedev.overblock.games.LobbyManager;
 import me.ferdithedev.overblock.games.arena.better.LocalGameMap;
 import me.ferdithedev.overblock.games.cmds.SpawnBox;
 import me.ferdithedev.overblock.games.teams.TeamObject;
@@ -87,6 +89,8 @@ public final class OverBlock extends JavaPlugin {
 
         getCommand("lobby").setExecutor(new LobbyCmd());
 
+        getCommand("join").setExecutor(new JoinCmd());
+
         getCommand("browser").setExecutor(new BrowserCommand());
 
         if(settings.LOBBY != null) {
@@ -98,8 +102,11 @@ public final class OverBlock extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        //stop runnables
+        TurretManager.stopTicker();
+
         for(LocalGameMap map : getGameManager().getArenaManager().getAllArenas()) {
-            OverBlock.print("Deleting active world: " + map.getArena().getName());
+            OverBlock.print("Deleting active world: " + map.getWorld().getName());
             map.unload();
         }
         TurretManager.getArmorStands().forEach(a -> a.remove());

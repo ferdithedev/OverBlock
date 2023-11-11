@@ -4,6 +4,7 @@ import me.ferdithedev.overblock.fm.Config;
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.impl.BoostStaff;
 import me.ferdithedev.overblock.obitems.impl.Flamethrower;
+import me.ferdithedev.overblock.obitems.impl.Mjolnir;
 import me.ferdithedev.overblock.obitems.turrets.impl.RapidTurret;
 import me.ferdithedev.overblock.obitems.turrets.impl.TestTurret;
 import org.bukkit.GameMode;
@@ -60,6 +61,7 @@ public class ItemManager implements Listener {
         overBlock.addItem(new Flamethrower(plugin));
         overBlock.addItem(new TestTurret(plugin));
         overBlock.addItem(new RapidTurret(plugin));
+        overBlock.addItem(new Mjolnir(plugin));
         registerItemPackage(overBlock);
     }
 

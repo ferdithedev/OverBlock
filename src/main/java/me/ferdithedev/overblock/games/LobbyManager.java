@@ -26,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.List;
 public class LobbyManager implements Listener {
 
     private World lobby;
-    private BukkitRunnable countdown;
+    private BukkitTask countdown;
     private OverBlock plugin;
     private int time = 0;
     private ItemStack iquit;
@@ -151,8 +152,7 @@ public class LobbyManager implements Listener {
                 }
                 time--;
             }
-        };
-        countdown.runTaskTimer(plugin, 0, 20);
+        }.runTaskTimer(plugin, 0, 20);
 
     }
 
@@ -331,5 +331,9 @@ public class LobbyManager implements Listener {
 
     public World getLobby() {
         return lobby;
+    }
+
+    public void stopCountdown() {
+        if(countdown != null) countdown.cancel();
     }
 }

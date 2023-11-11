@@ -24,7 +24,7 @@ public class GetOBItem implements CommandExecutor, TabCompleter {
                     if(args[0].equalsIgnoreCase(obitem.getInternalName()) || args[0].equalsIgnoreCase(obitem.getItemPackage().getInternalName().toLowerCase() + ":" + obitem.getInternalName())) {
                         int amount = 1;
                         if(args.length > 1 && BetterTeleport.isNumeric(args[1])) amount = Integer.parseInt(args[1]);
-                        ItemStack add = obitem.getItemStack();
+                        ItemStack add = obitem.getItemStack().clone();
                         add.setAmount(amount);
                         ((Player) sender).getInventory().addItem(add);
                         if(!obitem.isEnabled()) sender.sendMessage("§c§lWARINING! §cThis item is currently not available in-game since it's not enabled in the 'items.yml' at §e'" + obitem.getPlugin().getName() + "->" + obitem.getInternalName() + "->enabled'§c!");

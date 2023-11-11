@@ -28,7 +28,7 @@ public class GameManager implements Listener {
         gameBroadcast(participants,"§7Preparing world...");
         LocalGameMap arena = arenaManager.getFreeArena();
 
-        if(arena != null) {
+        if(arena != null && arena.load()) {
             Game newGame = new Game(arena,participants,mode,plugin);
             newGame.start();
             activeGames.add(newGame);

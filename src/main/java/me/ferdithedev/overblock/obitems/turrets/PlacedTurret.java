@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class PlacedTurret {
@@ -35,6 +36,7 @@ public class PlacedTurret {
         armorStand.setSmall(true);
         armorStand.setCustomName(name);
         armorStand.setCustomNameVisible(true);
+        armorStand.addEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.REMOVING_OR_CHANGING);
         assert armorStand.getEquipment() != null;
         armorStand.getEquipment().setHelmet(display);
         TurretManager.getArmorStands().add(armorStand);

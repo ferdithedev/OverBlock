@@ -1,10 +1,12 @@
 name: OverBlock
 version: ${project.version}
 main: me.ferdithedev.overblock.OverBlock
-api-version: 1.18
+api-version: 1.19
 prefix: OB
 authors: [ Ferdi_the_best ]
 description: OverBlock
+depend:
+  - VoidGen
 softdepend:
   - Multiverse-Core
 commands:
@@ -29,3 +31,6 @@ commands:
     description: Spawns box based on int
   browser:
     description: Open the item package browser
+  join:
+    description: Join a new game!
+    aliases: ['g']

@@ -23,8 +23,7 @@ public class Flamethrower extends OBItem {
 
     @Override
     public boolean function(Player player) {
-        int taskid = Bukkit.getScheduler().scheduleAsyncRepeatingTask(OverBlock.getInstance(), () -> {
-            if(player.getInventory().getItemInMainHand().isSimilar(getItemStack())) {
+        int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(OverBlock.getInstance(), () -> {
                 int distance = 10;
                 Location origin = player.getEyeLocation();
                 Vector direction = origin.getDirection();
@@ -63,7 +62,7 @@ public class Flamethrower extends OBItem {
                         }
                     });
                 }
-            }
+
         }, 0, 10);
         Bukkit.getScheduler().scheduleSyncDelayedTask(OverBlock.getInstance(), () -> Bukkit.getScheduler().cancelTask(taskid), 40);
         return true;

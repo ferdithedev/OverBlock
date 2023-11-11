@@ -10,9 +10,9 @@ Spawnlocation:
   yaw: 180.0
   pitch: 0.0
 Lobbyspawnlocation:
-  x: 2.5
-  y: 64
-  z: -0.5
-  world: lobby
-  yaw: 0.0
+  x: -1.5
+  y: 65
+  z: 0.5
+  world: waitinglobby
+  yaw: -90.0
   pitch: 0.0

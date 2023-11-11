@@ -28,12 +28,12 @@ public class ArenaManager {
 
         if(arenas != null) {
             for(Arena a : arenas) {
-                allArenas.add(new LocalGameMap(OverBlock.gameMapsFolder,a.getWorldName(),false, a));
+                allArenas.add(new LocalGameMap(OverBlock.gameMapsFolder,a.worldName(),false, a));
             }
 
             for(File f : Objects.requireNonNull(Bukkit.getServer().getWorldContainer().listFiles())) {
                 for(Arena a : arenas) {
-                    if(f.getName().contains(a.getWorldName()+"_active_")) {
+                    if(f.getName().contains(a.worldName()+"_active_")) {
                         FileUtil.delete(f);
                         break;
                     }

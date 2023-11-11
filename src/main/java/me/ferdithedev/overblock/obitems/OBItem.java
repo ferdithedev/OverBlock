@@ -66,10 +66,10 @@ public abstract class OBItem {
     public abstract boolean function(Player player);
 
     public boolean click(PlayerInteractEvent e) {
+        e.setCancelled(true);
         if(e.getAction() == Action.RIGHT_CLICK_AIR) {
             return function(e.getPlayer());
         }
-        e.setCancelled(true);
         return false;
     }
 

@@ -1,11 +1,9 @@
 package me.ferdithedev.overblock.games;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 import me.ferdithedev.overblock.OverBlock;
 import me.ferdithedev.overblock.obitems.OBItem;
 import me.ferdithedev.overblock.obitems.OBItemRarity;
-import org.apache.commons.codec.binary.Base64;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,9 +11,13 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
-import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -115,28 +117,20 @@ public class ItemSpawner {
             return skull;
 
         ItemMeta skullMeta = skull.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-        byte[] encodedData = Base64.encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
-        profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
-        Field profileField = null;
 
+        if(skullMeta == null) return skull;
+
+        UUID uuid = UUID.randomUUID();
+        PlayerProfile profile = Bukkit.createPlayerProfile(uuid);
+        PlayerTextures texture = profile.getTextures();
         try {
-            assert skullMeta != null;
-            profileField = skullMeta.getClass().getDeclaredField("profile");
-        } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+            texture.setSkin(new URL(url));
+        } catch (MalformedURLException e) {
+            OverBlock.printWarn("Can't resolve texture URL: " + url);
+            return skull;
         }
-
-        if (profileField != null) {
-            profileField.setAccessible(true);
-        }
-
-        try {
-            assert profileField != null;
-            profileField.set(skullMeta, profile);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        profile.setTextures(texture);
+        ((SkullMeta) skullMeta).setOwnerProfile(profile);
 
         skull.setItemMeta(skullMeta);
         return skull;
