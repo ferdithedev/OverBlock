@@ -4,9 +4,7 @@ import me.ferdithedev.overblock.util.ChatUtil;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 
 public enum OBItemRarity {
 
