@@ -193,6 +193,7 @@ public class Game {
                 p.getInventory().clear();
                 p.setFoodLevel(20);
                 p.setHealth(20);
+                p.setGameMode(GameMode.ADVENTURE);
                 String creator = arena.getArena().creator();
                 if(creator != null && !creator.isBlank()) p.sendMessage("§eMap build by: §c" + arena.getArena().creator());
             }

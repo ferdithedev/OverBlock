@@ -72,6 +72,7 @@ public class LobbyManager implements Listener {
                     e.getPlayer().getInventory().setItem(0,ivote);
                     e.getPlayer().setHealth(20);
                     e.getPlayer().setFoodLevel(20);
+                    e.getPlayer().setGameMode(GameMode.ADVENTURE);
                     votes.put(e.getPlayer(), GameManager.GameMode.NORMAL);
                     votingBar.addPlayer(e.getPlayer());
                     updateBossbar();
